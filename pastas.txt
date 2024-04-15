@@ -1,0 +1,83 @@
++---SimuladorPC
+|   |   Program.cs
+|   |   SimuladorPC.csproj
++---SimuladorPC.Api
+|   |   appsettings.Development.json
+|   |   appsettings.json
+|   |   Program.cs
+|   |   SimuladorPC.Api.csproj
+|   |   SimuladorPC.Api.csproj.user
+|   |   SimuladorPC.Api.http
+|   |                   
+|   +---Controllers
+|   |       GabineteController.cs
++---SimuladorPC.Data
+|   |   Class1.cs
+|   |   SimuladorPC.Data.csproj
+|   |               
+|   +---Context
+|   |       SimuladorPcContext.cs
+|   |       
+|   +---Migrations
+|   |       20240407000903_InitialCreate.cs
+|   |       20240407000903_InitialCreate.Designer.cs
+|   |       SimuladorPcContextModelSnapshot.cs
+|   |                   
+|   \---Repositories
+|           GabineteRepository.cs
+|           
++---SimuladorPC.Domain
+|   |   PcieSlot.cs
+|   |   PortaUsb.cs
+|   |   SimuladorPC.Domain.csproj
+|   |   SlotM2.cs
+|   |               
+|   +---Entities
+|   |       Componente.cs
+|   |       CPU.cs
+|   |       Fonte.cs
+|   |       Gabinete.cs
+|   |       GPU.cs
+|   |       Hd.cs
+|   |       Iluminacao.cs
+|   |       PlacaMae.cs
+|   |       Ram.cs
+|   |       SSD.cs
+|   |       WaterCooler.cs
+|   |       
+|   +---Enums
+|   |       SocketSuportado.cs
+|   |       TamanhoPlacaMae.cs
+|   |       
+|   +---Interfaces
+|   |   +---Repositories
+|   |   |       IGabineteRepository.cs
+|   |   |       
+|   |   \---Services
+|   |           IGabineteService.cs
+|   | 
+|                       
++---SimuladorPC.Infra
+|   |   SimuladorPC.Application.csproj
+|   |   
+|   +---AppService
+|   |       GabineteService.cs
+|   |       
+|   +---bin
+|   |   \---Debug
+|   |       \---net8.0
+|   |               SimuladorPC.Application.deps.json
+|   |               SimuladorPC.Application.dll
+|   |               SimuladorPC.Application.pdb
+|   |               SimuladorPC.Domain.dll
+|   |               SimuladorPC.Domain.pdb
+|   |               
+|   +---DTO
+|                       
+\---SimuladorPC.Web
+    |   appsettings.Development.json
+    |   appsettings.json
+    |   Program.cs
+    |   SimuladorPC.Web.csproj
+    |   SimuladorPC.Web.csproj.user
+    |   

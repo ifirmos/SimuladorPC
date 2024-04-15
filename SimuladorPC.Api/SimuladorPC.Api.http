@@ -1,0 +1,6 @@
+@SimuladorPC.Api_HostAddress = http://localhost:5127
+
+GET {{SimuladorPC.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
