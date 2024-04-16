@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/SimuladorPC.Domain/PcieSlot.cs
+/SimuladorPC.Domain/PortaUsb.cs
+/SimuladorPC.Domain/SlotM2.cs
+/SimuladorPC.Domain/Entities/Iluminacao.cs
