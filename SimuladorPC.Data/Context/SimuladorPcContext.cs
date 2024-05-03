@@ -12,12 +12,6 @@ namespace SimuladorPC.Data
         
         public DbSet<Gabinete> Gabinetes { get; set; }
         public DbSet<WaterCooler> WaterCoolers { get; set; }
-        // Adicione DbSets para outras entidades conforme necessário
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<WaterCooler>().OwnsOne(wc => wc.Iluminacao);
-            modelBuilder.Entity<Gabinete>().OwnsOne(g => g.Iluminacao);
         }
     }
 }
