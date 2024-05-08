@@ -1,9 +1,10 @@
-﻿using SimuladorPC.Domain.Interfaces.Repositories;
+﻿using SimuladorPC.Domain.Entities.Hardware;
+using SimuladorPC.Domain.Interfaces.Repositories;
 using SimuladorPC.Domain.Interfaces.Services;
 
 namespace SimuladorPC.Domain.Services;
 
-public class ComponenteService<T> : IComponenteService<T> where T : class
+public class ComponenteService<T> : IComponenteService<T> where T : Componente
 {
     private readonly IBaseRepository<T> _repository;
 

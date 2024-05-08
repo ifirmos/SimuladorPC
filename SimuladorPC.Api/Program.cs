@@ -1,16 +1,16 @@
 using Microsoft.EntityFrameworkCore;
-using SimuladorPC.Data;
-using SimuladorPC.Data.Repositories;
 using SimuladorPC.Domain.Interfaces.Services;
-using SimuladorPC.Application.Services;
 
 using SimuladorPC.Domain.Interfaces.Repositories;
 using System.Text.Json.Serialization;
+using SimuladorPC.Infrastructure.Repositories;
+using SimuladorPC.Domain.Services;
+using SimuladorPC.Infrastructure.Data;
+using SimuladorPC.Domain.Entities.Hardware;
+using SimuladorPC.Domain.Entities.Software;
 
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -20,12 +20,45 @@ builder.Services.AddControllers()
 builder.Services.AddDbContext<SimuladorPcContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SimuladorPcDatabase")));
 
-builder.Services.AddScoped<IGabineteService, GabineteService>();
-builder.Services.AddScoped<IGabineteRepository, GabineteRepository>();
+//Repositório base para todos os CRUD genéricos.
+builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+//// Configurações futuras para CPU
+builder.Services.AddScoped<ICpuService, CpuService>();
+builder.Services.AddScoped<ICpuRepository, CpuRepository>();
+
+//// Configurações futuras para GPU
+builder.Services.AddScoped<IGpuService, GpuService>();
+builder.Services.AddScoped<IGpuRepository, GpuRepository>();
+
+//// Configurações futuras para Placa Mãe
+builder.Services.AddScoped<IPlacaMaeService, PlacaMaeService>();
+builder.Services.AddScoped<IPlacaMaeRepository, PlacaMaeRepository>();
+
+//// Configurações futuras para RAM
+builder.Services.AddScoped<IRamService, RamService>();
+//builder.Services.AddScoped<IBaseRepository<Ram>, RamRepository>();
+
+//// Configurações futuras para Requisitos de Hardware
+builder.Services.AddScoped<IRequisitosHardwareService, RequisitosHardwareService>();
+//builder.Services.AddScoped<IBaseRepository<RequisitosHardware>, RequisitosHardwareRepository>();
+
+//// Configurações futuras para SSD
+builder.Services.AddScoped<ISsdService, SsdService>();
+//builder.Services.AddScoped<IBaseRepository<Ssd>, SsdRepository>();
+
+//// Configurações futuras para Fonte
+builder.Services.AddScoped<IFonteService, FonteService>();
+//builder.Services.AddScoped<IBaseRepository<Fonte>, FonteRepository>();
+
+//// Configurações futuras para Software
+builder.Services.AddScoped<ISoftwareService, SoftwareService>();
+//builder.Services.AddScoped<IBaseRepository<Software>, SoftwareRepository>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAutoMapper(typeof(AutoMappingConfig));
 
 var app = builder.Build();
 

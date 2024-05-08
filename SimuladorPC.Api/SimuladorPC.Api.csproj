@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="WeatherForecast.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -15,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SimuladorPC.Data\SimuladorPC.Data.csproj" />
-    <ProjectReference Include="..\SimuladorPC.Infra\SimuladorPC.Application.csproj" />
+    <ProjectReference Include="..\SimuladorPC.Application\SimuladorPC.Application.csproj" />
+    <ProjectReference Include="..\SimuladorPC.Infrastructure\SimuladorPC.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

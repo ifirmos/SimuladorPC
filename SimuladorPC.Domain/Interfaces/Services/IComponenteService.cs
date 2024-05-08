@@ -1,8 +1,8 @@
-﻿using SimuladorPC.Domain.Entities;
+﻿using SimuladorPC.Domain.Entities.Hardware;
 
 namespace SimuladorPC.Domain.Interfaces.Services;
 
-public interface IComponenteService<T>
+public interface IComponenteService<T> where T : Componente
 {
     IEnumerable<T> GetAll();
     T GetById(int id);

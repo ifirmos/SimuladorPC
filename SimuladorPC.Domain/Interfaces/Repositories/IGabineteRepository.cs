@@ -1,10 +1,8 @@
 ﻿
-using SimuladorPC.Domain.Entities;
+using SimuladorPC.Domain.Entities.Hardware;
 
 namespace SimuladorPC.Domain.Interfaces.Repositories;
 
-public interface IGabineteRepository
+public interface IGabineteRepository : IBaseRepository<Gabinete>
 {
-    void Add(Gabinete gabinete);    
-    IEnumerable<Gabinete> GetAll();    
 }

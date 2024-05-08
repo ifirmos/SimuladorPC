@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SimuladorPC.Application.DTO;
-using AutoMapper;
 using SimuladorPC.Domain.Interfaces.Services;
 using SimuladorPC.Domain.Entities.Hardware;
+using AutoMapper;
 
 namespace SimuladorPC.Api.Controllers.HardwareControllers
 {

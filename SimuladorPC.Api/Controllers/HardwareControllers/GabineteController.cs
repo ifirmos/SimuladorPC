@@ -45,7 +45,7 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState); // Retorna os erros de validação
+                return BadRequest(ModelState); 
             }
 
             Gabinete gabinete;
