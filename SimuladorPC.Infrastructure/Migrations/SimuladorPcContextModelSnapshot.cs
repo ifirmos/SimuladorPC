@@ -111,9 +111,8 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Socket")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("SocketProcessadorId")
+                        .HasColumnType("int");
 
                     b.Property<string>("SuporteMemoria")
                         .IsRequired()
@@ -135,6 +134,8 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SocketProcessadorId");
 
                     b.ToTable("Cpus");
                 });
@@ -271,6 +272,10 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("QtdMemoria")
                         .HasColumnType("int");
 
+                    b.Property<string>("Tecnologias")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Gpus");
@@ -338,15 +343,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("ChipsetId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ConectoresCooler")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ConectoresRGB12V")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ConectoresRGB5V")
-                        .HasColumnType("int");
-
                     b.Property<string>("Fabricante")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -361,18 +357,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("QuantidadeM2Slots")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuantidadePCIe")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuantidadeUSBsExternos")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuantidadeUSBsInternos")
-                        .HasColumnType("int");
 
                     b.Property<int>("SlotsMemoria")
                         .HasColumnType("int");
@@ -579,19 +563,25 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<double>("GpuImportancia")
                         .HasColumnType("float");
 
-                    b.Property<int>("MinimaRamGb")
-                        .HasColumnType("int");
-
                     b.Property<int>("MinimoArmazenamentoGb")
                         .HasColumnType("int");
 
                     b.Property<float>("MinimoClockGhzCpu")
                         .HasColumnType("real");
 
+                    b.Property<float>("MinimoClockGhzGpu")
+                        .HasColumnType("real");
+
                     b.Property<int>("MinimoNucleosCpu")
                         .HasColumnType("int");
 
+                    b.Property<int>("MinimoRamGb")
+                        .HasColumnType("int");
+
                     b.Property<int>("MinimoVRamGpuMb")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NivelDesempenho")
                         .HasColumnType("int");
 
                     b.Property<double>("RamImportancia")
@@ -599,6 +589,9 @@ namespace SimuladorPC.Infrastructure.Migrations
 
                     b.Property<int>("SoftwareId")
                         .HasColumnType("int");
+
+                    b.Property<string>("TecnologiasRequeridas")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TipoArmazenamento")
                         .IsRequired()
@@ -620,8 +613,8 @@ namespace SimuladorPC.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -630,11 +623,23 @@ namespace SimuladorPC.Infrastructure.Migrations
 
                     b.Property<string>("Versao")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Softwares");
+                });
+
+            modelBuilder.Entity("SimuladorPC.Domain.Entities.Hardware.Cpu", b =>
+                {
+                    b.HasOne("SimuladorPC.Domain.Entities.Hardware.SocketProcessador", "Socket")
+                        .WithMany()
+                        .HasForeignKey("SocketProcessadorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Socket");
                 });
 
             modelBuilder.Entity("SimuladorPC.Domain.Entities.Hardware.PlacaMae", b =>
@@ -674,11 +679,13 @@ namespace SimuladorPC.Infrastructure.Migrations
 
             modelBuilder.Entity("SimuladorPC.Domain.Entities.Software.RequisitosHardware", b =>
                 {
-                    b.HasOne("SimuladorPC.Domain.Entities.Software.Software", null)
+                    b.HasOne("SimuladorPC.Domain.Entities.Software.Software", "Software")
                         .WithMany("Requisitos")
                         .HasForeignKey("SoftwareId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Software");
                 });
 
             modelBuilder.Entity("SimuladorPC.Domain.Entities.Software.Software", b =>

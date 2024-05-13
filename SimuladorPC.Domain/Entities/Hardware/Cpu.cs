@@ -22,7 +22,8 @@ public class Cpu : Componente
     public int Threads { get; private set; }
     public float FrequenciaBase { get; private set; }
     public float FrequenciaMaxima { get; private set; }
-    public string Socket { get; private set; }
+    public SocketProcessador Socket { get; private set; }
+    public int SocketProcessadorId { get; private set; }
     public int Tdp { get; private set; }
 }
 

@@ -8,6 +8,6 @@ public class CpuRepository(SimuladorPcContext context) : BaseRepository<Cpu>(con
 {
     public IEnumerable<Cpu> ObterCPUsCompativeisPorSocket(string socketType)
     {
-        return context.Cpus.Where(cpu => cpu.Socket == socketType).ToList();
+        return context.Cpus.Where(cpu => cpu.Socket.Nome == socketType);
     }
 }

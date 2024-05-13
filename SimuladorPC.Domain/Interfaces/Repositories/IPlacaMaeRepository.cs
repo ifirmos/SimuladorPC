@@ -6,4 +6,5 @@ public interface IPlacaMaeRepository : IBaseRepository<PlacaMae>
 {
     IEnumerable<PlacaMae> BuscaPorSocket(int socketId);
     IEnumerable<PlacaMae> BuscaPorChipset(int chipsetId);
+    IEnumerable<Cpu> ListarCpusCompativeis(int placaMaeId);
 }

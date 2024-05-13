@@ -31,9 +31,14 @@ builder.Services.AddScoped<ICpuRepository, CpuRepository>();
 builder.Services.AddScoped<IGpuService, GpuService>();
 builder.Services.AddScoped<IGpuRepository, GpuRepository>();
 
+builder.Services.AddScoped<IGabineteRepository, GabineteRepository>();
+
 //// Configurações futuras para Placa Mãe
 builder.Services.AddScoped<IPlacaMaeService, PlacaMaeService>();
 builder.Services.AddScoped<IPlacaMaeRepository, PlacaMaeRepository>();
+
+builder.Services.AddScoped<ISoftwareService, SoftwareService>();
+builder.Services.AddScoped<ISoftwareRepository, SoftwareRepository>();
 
 //// Configurações futuras para RAM
 builder.Services.AddScoped<IRamService, RamService>();

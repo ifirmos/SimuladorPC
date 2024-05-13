@@ -6,7 +6,7 @@ public interface ISoftwareService
 {
     IEnumerable<Software> GetAll();
     Software GetById(int id);
-    Software Add(Software entity);
+    Software AdicionarSoftware(Software software);
     void Update(Software entity);
     void Delete(Software entity);
 }

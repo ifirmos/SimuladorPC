@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SimuladorPC.Domain.Entities.Hardware;
+using SimuladorPC.Domain.Enums;
 using SimuladorPC.Domain.Interfaces.Repositories;
 using SimuladorPC.Infrastructure.Data;
 

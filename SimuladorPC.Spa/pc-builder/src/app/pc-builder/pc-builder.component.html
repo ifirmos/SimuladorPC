@@ -1,0 +1,7 @@
+<h2>Monte seu PC</h2>
+
+<label for="gpu-select">Escolha uma GPU:</label>
+<select id="gpu-select" [(ngModel)]="selectedGpuId" (change)="onSelectGpu(selectedGpuId)">
+  <option value="" disabled selected>Selecione uma GPU</option>
+  <option *ngFor="let gpu of Gpus" [value]="gpu.id">{{ gpu.name }}</option>
+</select>

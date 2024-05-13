@@ -3,6 +3,7 @@ using SimuladorPC.Application.DTO;
 using AutoMapper;
 using SimuladorPC.Domain.Interfaces.Services;
 using SimuladorPC.Domain.Entities.Hardware;
+using System;
 
 namespace SimuladorPC.Api.Controllers.HardwareControllers
 {
@@ -27,6 +28,14 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
             return Ok(placaMaesDto);
         }
 
+        [HttpGet("cpusCompativeis/{placaMaeId}")]
+        public ActionResult<IEnumerable<Cpu>> ListarCpusCompativeis(int placaMaeId)
+        {            
+            var processadoresCompativeis = _placaMaeService.ListarCpusCompativeis(placaMaeId);
+            var processadoresCompativeisDto = _mapper.Map<IEnumerable<CpuDto>>(processadoresCompativeis);
+            return Ok(processadoresCompativeisDto);
+        }
+
         [HttpGet("{id}")]
         public ActionResult<PlacaMaeDto> GetById(int id)
         {
@@ -44,46 +53,21 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState); 
+                return BadRequest(ModelState);
             }
 
-            PlacaMae placaMae;
+            var placaMae = _mapper.Map<PlacaMae>(placaMaeDto);
+
             try
             {
-                placaMae = _mapper.Map<PlacaMae>(placaMaeDto);
+                var placaMaeCriada = _placaMaeService.AdicionarPlacaMae(placaMae);
+                var placaMaeRetornoDto = _mapper.Map<PlacaMaeDto>(placaMaeCriada);
+                return CreatedAtAction(nameof(GetById), new { id = placaMaeCriada.Id }, placaMaeRetornoDto);
             }
             catch (Exception ex)
             {
-                return BadRequest($"Erro ao mapear o objeto: {ex.Message}");
+                return BadRequest($"Erro ao adicionar a placa-mãe: {ex.Message}");
             }
-
-            PlacaMae placaMaeCriada;
-            try
-            {
-                placaMaeCriada = _placaMaeService.Add(placaMae);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"Erro ao adicionar o placaMae: {ex.Message}");
-            }
-
-            if (placaMaeCriada == null)
-            {
-                return BadRequest("Não foi possível criar o placaMae.");
-            }
-
-            PlacaMaeDto placaMaeRetornoDto;
-            try
-            {
-                placaMaeRetornoDto = _mapper.Map<PlacaMaeDto>(placaMaeCriada);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"Erro ao mapear o placaMae criado para DTO: {ex.Message}");
-            }
-
-            return CreatedAtAction(nameof(GetById), new { id = placaMaeCriada.Id }, placaMaeRetornoDto);
         }
-
     }
 }

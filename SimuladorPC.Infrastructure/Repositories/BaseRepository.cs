@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SimuladorPC.Domain.Interfaces.Repositories;
+using System.Linq.Expressions;
 
 namespace SimuladorPC.Infrastructure.Data;
 
@@ -14,11 +15,15 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class
         _entities = context.Set<T>();
     }
 
-    public IEnumerable<T> GetAll() => _entities.ToList();
-    public T GetById(int id) => _entities.Find(id);
+    public IEnumerable<T> GetAll() => _entities;
+    public T GetById(int id)
+    {
+        return _entities.Find(id);
+    }
+
     public void Add(T entity)
     {
-        _entities.Add(entity);
+        _context.Set<T>().Add(entity);
         _context.SaveChanges();
     }
     public void Update(T entity)
@@ -30,5 +35,9 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         _entities.Remove(entity);
         _context.SaveChanges();
+    }
+    public bool Any(Expression<Func<T, bool>> predicate)
+    {
+        return _context.Set<T>().Any(predicate);
     }
 }

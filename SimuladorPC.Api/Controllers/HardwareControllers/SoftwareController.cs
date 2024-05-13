@@ -3,6 +3,8 @@ using SimuladorPC.Application.DTO;
 using AutoMapper;
 using SimuladorPC.Domain.Interfaces.Services;
 using SimuladorPC.Domain.Entities.Software;
+using SimuladorPC.Domain.Entities.Hardware;
+using SimuladorPC.Domain.Services;
 
 namespace SimuladorPC.Api.Controllers.HardwareControllers
 {
@@ -40,49 +42,25 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
         }
 
         [HttpPost]
-        public ActionResult<SoftwareDto> Criar(SoftwareDto SoftwareDto)
+        public ActionResult<SoftwareDto> Criar(SoftwareDto softwareDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            Software Software;
+            var software = _mapper.Map<Software>(softwareDto);
+
             try
             {
-                Software = _mapper.Map<Software>(SoftwareDto);
+                var softwareCriado = _SoftwareService.AdicionarSoftware(software);
+                var softwareRetornoDto = _mapper.Map<SoftwareDto>(softwareCriado);
+                return CreatedAtAction(nameof(GetById), new { id = softwareCriado.Id }, softwareRetornoDto);
             }
             catch (Exception ex)
             {
-                return BadRequest($"Erro ao mapear o objeto: {ex.Message}");
+                return BadRequest($"Erro ao adicionar a placa-mãe: {ex.Message}");
             }
-
-            Software SoftwareCriado;
-            try
-            {
-                SoftwareCriado = _SoftwareService.Add(Software);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"Erro ao adicionar o objeto: {ex.Message}");
-            }
-
-            if (SoftwareCriado == null)
-            {
-                return BadRequest("Não foi possível criar o objeto.");
-            }
-
-            SoftwareDto SoftwareRetornoDto;
-            try
-            {
-                SoftwareRetornoDto = _mapper.Map<SoftwareDto>(SoftwareCriado);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"Erro ao mapear para DTO: {ex.Message}");
-            }
-
-            return CreatedAtAction(nameof(GetById), new { id = SoftwareCriado.Id }, SoftwareRetornoDto);
         }
 
     }

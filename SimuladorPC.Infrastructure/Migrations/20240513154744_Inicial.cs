@@ -25,43 +25,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cpus",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    LinhaProduto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TecnologiaFabricacao = table.Column<int>(type: "int", nullable: false),
-                    CacheL1 = table.Column<int>(type: "int", nullable: false),
-                    CacheL2 = table.Column<int>(type: "int", nullable: false),
-                    CacheL3 = table.Column<int>(type: "int", nullable: false),
-                    SuporteMultithreading = table.Column<bool>(type: "bit", nullable: false),
-                    ConjuntoInstrucoes = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FrequenciaBoost = table.Column<int>(type: "int", nullable: false),
-                    ConsumoEnergia = table.Column<int>(type: "int", nullable: false),
-                    GraficosIntegrados = table.Column<bool>(type: "bit", nullable: false),
-                    TemperaturaMaxima = table.Column<int>(type: "int", nullable: false),
-                    SuporteMemoria = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NumeroCanaisMemoria = table.Column<int>(type: "int", nullable: false),
-                    Plataforma = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PcieVersao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PcieLanes = table.Column<int>(type: "int", nullable: false),
-                    Nucleos = table.Column<int>(type: "int", nullable: false),
-                    Threads = table.Column<int>(type: "int", nullable: false),
-                    FrequenciaBase = table.Column<float>(type: "real", nullable: false),
-                    FrequenciaMaxima = table.Column<float>(type: "real", nullable: false),
-                    Socket = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Tdp = table.Column<int>(type: "int", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Fabricante = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Modelo = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cpus", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Fontes",
                 columns: table => new
                 {
@@ -117,6 +80,7 @@ namespace SimuladorPC.Infrastructure.Migrations
                     FrequenciaBase = table.Column<float>(type: "real", nullable: false),
                     FrequenciaMax = table.Column<float>(type: "real", nullable: false),
                     ChipsetId = table.Column<int>(type: "int", nullable: false),
+                    Tecnologias = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Fabricante = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Modelo = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -181,8 +145,8 @@ namespace SimuladorPC.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Versao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Versao = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Descricao = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -268,20 +232,66 @@ namespace SimuladorPC.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Cpus",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LinhaProduto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TecnologiaFabricacao = table.Column<int>(type: "int", nullable: false),
+                    CacheL1 = table.Column<int>(type: "int", nullable: false),
+                    CacheL2 = table.Column<int>(type: "int", nullable: false),
+                    CacheL3 = table.Column<int>(type: "int", nullable: false),
+                    SuporteMultithreading = table.Column<bool>(type: "bit", nullable: false),
+                    ConjuntoInstrucoes = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FrequenciaBoost = table.Column<int>(type: "int", nullable: false),
+                    ConsumoEnergia = table.Column<int>(type: "int", nullable: false),
+                    GraficosIntegrados = table.Column<bool>(type: "bit", nullable: false),
+                    TemperaturaMaxima = table.Column<int>(type: "int", nullable: false),
+                    SuporteMemoria = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NumeroCanaisMemoria = table.Column<int>(type: "int", nullable: false),
+                    Plataforma = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PcieVersao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PcieLanes = table.Column<int>(type: "int", nullable: false),
+                    Nucleos = table.Column<int>(type: "int", nullable: false),
+                    Threads = table.Column<int>(type: "int", nullable: false),
+                    FrequenciaBase = table.Column<float>(type: "real", nullable: false),
+                    FrequenciaMaxima = table.Column<float>(type: "real", nullable: false),
+                    SocketProcessadorId = table.Column<int>(type: "int", nullable: false),
+                    Tdp = table.Column<int>(type: "int", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Fabricante = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Modelo = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cpus", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cpus_SocketProcessadores_SocketProcessadorId",
+                        column: x => x.SocketProcessadorId,
+                        principalTable: "SocketProcessadores",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RequisitosHardware",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SoftwareId = table.Column<int>(type: "int", nullable: false),
+                    Nivel = table.Column<int>(type: "int", nullable: false),
+                    TecnologiasRequeridas = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CpuImportancia = table.Column<double>(type: "float", nullable: false),
                     GpuImportancia = table.Column<double>(type: "float", nullable: false),
                     RamImportancia = table.Column<double>(type: "float", nullable: false),
                     ArmazenamentoImportancia = table.Column<double>(type: "float", nullable: false),
                     MinimoNucleosCpu = table.Column<int>(type: "int", nullable: false),
                     MinimoClockGhzCpu = table.Column<float>(type: "real", nullable: false),
+                    MinimoClockGhzGpu = table.Column<float>(type: "real", nullable: false),
                     MinimoVRamGpuMb = table.Column<int>(type: "int", nullable: false),
-                    MinimaRamGb = table.Column<int>(type: "int", nullable: false),
+                    MinimoRamGb = table.Column<int>(type: "int", nullable: false),
                     MinimoArmazenamentoGb = table.Column<int>(type: "int", nullable: false),
                     TipoArmazenamento = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -308,13 +318,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                     TipoMemoriaId = table.Column<int>(type: "int", nullable: false),
                     SlotsMemoria = table.Column<int>(type: "int", nullable: false),
                     MaxMemoriaSuportadaGb = table.Column<int>(type: "int", nullable: false),
-                    QuantidadeUSBsInternos = table.Column<int>(type: "int", nullable: false),
-                    QuantidadeUSBsExternos = table.Column<int>(type: "int", nullable: false),
-                    ConectoresRGB5V = table.Column<int>(type: "int", nullable: false),
-                    ConectoresRGB12V = table.Column<int>(type: "int", nullable: false),
-                    QuantidadePCIe = table.Column<int>(type: "int", nullable: false),
-                    QuantidadeM2Slots = table.Column<int>(type: "int", nullable: false),
-                    ConectoresCooler = table.Column<int>(type: "int", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Fabricante = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Modelo = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -347,6 +350,11 @@ namespace SimuladorPC.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cpus_SocketProcessadorId",
+                table: "Cpus",
+                column: "SocketProcessadorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlacasMae_ChipsetId",

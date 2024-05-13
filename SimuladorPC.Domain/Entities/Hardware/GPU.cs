@@ -1,4 +1,6 @@
-﻿namespace SimuladorPC.Domain.Entities.Hardware;
+﻿using SimuladorPC.Domain.Enums;
+
+namespace SimuladorPC.Domain.Entities.Hardware;
 
 public class Gpu : Componente
 {
@@ -10,4 +12,5 @@ public class Gpu : Componente
     public float FrequenciaBase { get; set; }
     public float FrequenciaMax { get; set; }
     public int ChipsetId { get; set; }
+    public IList<Tecnologias> Tecnologias { get; set; }
 }

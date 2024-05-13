@@ -5,7 +5,7 @@ using SimuladorPC.Domain.Entities.Software;
 
 namespace SimuladorPC.Infrastructure.Data;
 
-public class SimuladorPcContext(DbContextOptions<SimuladorPcContext> options) : DbContext(options)
+public class SimuladorPcContext : DbContext
 {
     public DbSet<Chipset> Chipsets { get; set; }
     public DbSet<Cpu> Cpus { get; set; }
@@ -23,6 +23,9 @@ public class SimuladorPcContext(DbContextOptions<SimuladorPcContext> options) : 
     public DbSet<Software> Softwares { get; set; }
     public DbSet<RequisitosHardware> RequisitosHardware { get; set;}
 
+    public SimuladorPcContext(DbContextOptions<SimuladorPcContext> options) : base(options)
+    {
+    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -30,6 +33,5 @@ public class SimuladorPcContext(DbContextOptions<SimuladorPcContext> options) : 
         modelBuilder.ApplyConfiguration(new SoftwareConfiguration());
         modelBuilder.ApplyConfiguration(new RequisitosHardwareConfiguration());
         modelBuilder.ApplyConfiguration(new PlacaMaeConfiguration());
-
     }
 }
