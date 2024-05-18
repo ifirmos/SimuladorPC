@@ -3,8 +3,6 @@ using SimuladorPC.Application.DTO;
 using AutoMapper;
 using SimuladorPC.Domain.Interfaces.Services;
 using SimuladorPC.Domain.Entities.Software;
-using SimuladorPC.Domain.Entities.Hardware;
-using SimuladorPC.Domain.Services;
 
 namespace SimuladorPC.Api.Controllers.HardwareControllers
 {
@@ -59,7 +57,7 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
             }
             catch (Exception ex)
             {
-                return BadRequest($"Erro ao adicionar a placa-mãe: {ex.Message}");
+                return BadRequest($"Erro ao adicionar o software: {ex.Message}");
             }
         }
 

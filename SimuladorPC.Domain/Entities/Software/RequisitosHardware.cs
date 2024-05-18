@@ -14,9 +14,9 @@ public class RequisitosHardware
     public double RamImportancia { get; private set; }
     public double ArmazenamentoImportancia { get; private set; }
     public int MinimoNucleosCpu { get; private set; }
-    public float MinimoClockGhzCpu { get; private set; }
-    public float MinimoClockGhzGpu { get; private set; }
-    public int MinimoVRamGpuMb { get; private set; }
+    public int MinimoClockGhzCpu { get; private set; }
+    public int MinimoClockGhzGpu { get; private set; }
+    public int MinimoVRamGpuGb { get; private set; }
     public int MinimoRamGb { get; private set; }
     public int MinimoArmazenamentoGb { get; private set; }
     public string TipoArmazenamento { get; private set; }

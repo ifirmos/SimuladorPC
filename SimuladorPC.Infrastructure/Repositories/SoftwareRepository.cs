@@ -1,4 +1,5 @@
-﻿using SimuladorPC.Domain.Entities.Hardware;
+﻿using Microsoft.EntityFrameworkCore;
+using SimuladorPC.Domain.Entities.Hardware;
 using SimuladorPC.Domain.Entities.Software;
 using SimuladorPC.Domain.Enums;
 using SimuladorPC.Domain.Interfaces.Repositories;
@@ -7,6 +8,10 @@ namespace SimuladorPC.Infrastructure.Data;
 
 public class SoftwareRepository(SimuladorPcContext context) : BaseRepository<Software>(context), ISoftwareRepository
 {
+    public override IEnumerable<Software> GetAll()
+    {
+        return _entities.Include(s => s.Requisitos).ToList();
+    }
     public Cpu ObterCpuCompativel(Software software)
     {
         // Busca o primeiro requisito de hardware do nível básico para o software especificado
@@ -19,7 +24,12 @@ public class SoftwareRepository(SimuladorPcContext context) : BaseRepository<Sof
         // Filtra e retorna a primeira CPU que atende ao requisito básico
         return context.Cpus
                        .FirstOrDefault(cpu => cpu.Nucleos >= requisitoBasico.MinimoNucleosCpu &&
-                                              cpu.FrequenciaBase >= requisitoBasico.MinimoClockGhzCpu);
+                                              cpu.FrequenciaBaseMhz >= requisitoBasico.MinimoClockGhzCpu);
+    }
+
+    Cpu ISoftwareRepository.ObterCpuCompativel(Software software)
+    {
+        throw new NotImplementedException();
     }
 
     Fonte ISoftwareRepository.ObterFonteAdequada(Software software, SetupPc setupPc)

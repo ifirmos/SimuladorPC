@@ -1,5 +1,3 @@
-using SimuladorPC.Domain.Entities.Software;
-
 namespace SimuladorPC.Application.DTO;
 
 public class SoftwareDto

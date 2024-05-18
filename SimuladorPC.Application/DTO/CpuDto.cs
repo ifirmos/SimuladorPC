@@ -22,8 +22,8 @@ public class CpuDto : ComponenteDto
     public int PcieLanes { get;set; }
     public int Nucleos { get;set; }
     public int Threads { get;set; }
-    public float FrequenciaBase { get;set; }
-    public float FrequenciaMaxima { get;set; }
-    public string Socket { get;set; }
+    public int FrequenciaBaseMhz { get;set; }
+    public int FrequenciaMaximaMhz { get;set; }
+    public SocketProcessadorDto Socket { get;set; }
     public int Tdp { get;set; }
 }

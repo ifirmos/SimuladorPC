@@ -62,7 +62,7 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
             {
                 var placaMaeCriada = _placaMaeService.AdicionarPlacaMae(placaMae);
                 var placaMaeRetornoDto = _mapper.Map<PlacaMaeDto>(placaMaeCriada);
-                return CreatedAtAction(nameof(GetById), new { id = placaMaeCriada.Id }, placaMaeRetornoDto);
+                return placaMaeRetornoDto;
             }
             catch (Exception ex)
             {

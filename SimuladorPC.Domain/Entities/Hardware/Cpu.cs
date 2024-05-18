@@ -20,8 +20,8 @@ public class Cpu : Componente
     public int PcieLanes { get; private set; }
     public int Nucleos { get; private set; }
     public int Threads { get; private set; }
-    public float FrequenciaBase { get; private set; }
-    public float FrequenciaMaxima { get; private set; }
+    public int FrequenciaBaseMhz { get; private set; }
+    public int FrequenciaMaximaMhz { get; private set; }
     public SocketProcessador Socket { get; private set; }
     public int SocketProcessadorId { get; private set; }
     public int Tdp { get; private set; }

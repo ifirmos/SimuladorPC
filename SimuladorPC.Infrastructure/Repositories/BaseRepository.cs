@@ -15,18 +15,18 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class
         _entities = context.Set<T>();
     }
 
-    public IEnumerable<T> GetAll() => _entities;
-    public T GetById(int id)
+    public virtual IEnumerable<T> GetAll() => _entities;
+    public virtual T GetById(int id)
     {
         return _entities.Find(id);
     }
 
-    public void Add(T entity)
+    public virtual void Add(T entity)
     {
         _context.Set<T>().Add(entity);
         _context.SaveChanges();
     }
-    public void Update(T entity)
+    public virtual void Update(T entity)
     {
         _entities.Update(entity);
         _context.SaveChanges();

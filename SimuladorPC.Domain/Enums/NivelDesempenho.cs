@@ -3,6 +3,6 @@
 public enum NivelDesempenho
 {
     Basico,
-    Padrao,
+    Intermediario,
     Premium
 }

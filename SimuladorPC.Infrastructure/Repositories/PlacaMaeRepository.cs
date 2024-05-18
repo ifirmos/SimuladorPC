@@ -11,6 +11,20 @@ public class PlacaMaeRepository : BaseRepository<PlacaMae>, IPlacaMaeRepository
     {
     }
 
+    public override IEnumerable<PlacaMae> GetAll()
+    {
+        return _entities
+            .Include(p => p.Chipset)
+            .Include(p => p.TamanhoPlacaMae)
+            .Include(p => p.SocketProcessador)
+            .Include(p => p.TipoMemoria);
+    }
+
+    public override PlacaMae GetById(int id)
+    {
+        return _entities.Include(p => p.Chipset)
+                        .SingleOrDefault(p => p.Id == id);
+    }
     public IEnumerable<PlacaMae> BuscaPorSocket(int socketId)
     {
         return _entities

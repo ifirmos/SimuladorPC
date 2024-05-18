@@ -1,4 +1,5 @@
 ﻿using SimuladorPC.Domain.Entities.Hardware;
+using SimuladorPC.Domain.Entities.Software;
 using SimuladorPC.Domain.Interfaces.Repositories;
 using SimuladorPC.Domain.Interfaces.Services;
 
@@ -7,11 +8,13 @@ namespace SimuladorPC.Domain.Services;
 public class PlacaMaeService : ComponenteService<PlacaMae>, IPlacaMaeService
 {
     private readonly IPlacaMaeRepository _placaMaeRepository;
+    private readonly IBaseRepository<Chipset> _chipsetRepository;
 
-    public PlacaMaeService(IPlacaMaeRepository placaMaeRepository)
+    public PlacaMaeService(IPlacaMaeRepository placaMaeRepository, IBaseRepository<Chipset> chipsetRepository)
         : base(placaMaeRepository) 
     {
         _placaMaeRepository = placaMaeRepository;
+        _chipsetRepository = chipsetRepository;
     }
 
     public IEnumerable<PlacaMae> BuscarPorSocket(int socketId)
@@ -27,7 +30,7 @@ public class PlacaMaeService : ComponenteService<PlacaMae>, IPlacaMaeService
     {
         if (_placaMaeRepository.Any(p => p.Nome.Trim().ToLower() == placaMae.Nome.Trim().ToLower()))
         {
-            throw new Exception("Uma placa-mãe com o mesmo nome já existe.");
+            throw new Exception("Um placaMae com o mesmo nome já existe.");
         }
 
         _placaMaeRepository.Add(placaMae);
@@ -36,6 +39,6 @@ public class PlacaMaeService : ComponenteService<PlacaMae>, IPlacaMaeService
 
     public IEnumerable<Cpu> ListarCpusCompativeis(int placaMaeId)
     {
-        return _placaMaeRepository.ListarCpusCompativeis(placaMaeId);
+        throw new NotImplementedException();
     }
 }

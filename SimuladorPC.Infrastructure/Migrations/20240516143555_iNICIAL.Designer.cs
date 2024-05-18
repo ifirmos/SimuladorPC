@@ -11,8 +11,8 @@ using SimuladorPC.Infrastructure.Data;
 namespace SimuladorPC.Infrastructure.Migrations
 {
     [DbContext(typeof(SimuladorPcContext))]
-    [Migration("20240513163114_NivelDesempenhoEnum")]
-    partial class NivelDesempenhoEnum
+    [Migration("20240516143555_iNICIAL")]
+    partial class iNICIAL
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,14 +73,14 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("FrequenciaBase")
-                        .HasColumnType("real");
+                    b.Property<int>("FrequenciaBaseMhz")
+                        .HasColumnType("int");
 
                     b.Property<int>("FrequenciaBoost")
                         .HasColumnType("int");
 
-                    b.Property<float>("FrequenciaMaxima")
-                        .HasColumnType("real");
+                    b.Property<int>("FrequenciaMaximaMhz")
+                        .HasColumnType("int");
 
                     b.Property<bool>("GraficosIntegrados")
                         .HasColumnType("bit");
@@ -239,18 +239,15 @@ namespace SimuladorPC.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ChipsetId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Fabricante")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("FrequenciaBase")
-                        .HasColumnType("real");
+                    b.Property<int>("FrequenciaBase")
+                        .HasColumnType("int");
 
-                    b.Property<float>("FrequenciaMax")
-                        .HasColumnType("real");
+                    b.Property<int>("FrequenciaMax")
+                        .HasColumnType("int");
 
                     b.Property<string>("Modelo")
                         .IsRequired()
@@ -266,17 +263,16 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("PortasHdmi")
                         .HasColumnType("int");
 
-                    b.Property<int>("PotenciaRecomendada")
+                    b.Property<int>("PotenciaRecomendadaEmWatts")
                         .HasColumnType("int");
 
                     b.Property<int>("QtdCoolers")
                         .HasColumnType("int");
 
-                    b.Property<int>("QtdMemoria")
+                    b.Property<int>("QtdMemoriaGb")
                         .HasColumnType("int");
 
-                    b.Property<string>("Tecnologias")
-                        .IsRequired()
+                    b.Property<string>("TecnologiasSuportadas")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -397,22 +393,44 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("CapacidadeGb")
                         .HasColumnType("int");
 
-                    b.Property<int>("Clock")
+                    b.Property<int>("ClockBaseMhz")
                         .HasColumnType("int");
+
+                    b.Property<int>("ClockMaximoOverclockMhz")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Ecc")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Fabricante")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Latencia")
+                        .HasColumnType("int");
+
                     b.Property<string>("Modelo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Modulos")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Rgb")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("TipoMemoria")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Voltagem")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("XmpSuportado")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
@@ -569,11 +587,11 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("MinimoArmazenamentoGb")
                         .HasColumnType("int");
 
-                    b.Property<float>("MinimoClockGhzCpu")
-                        .HasColumnType("real");
+                    b.Property<int>("MinimoClockGhzCpu")
+                        .HasColumnType("int");
 
-                    b.Property<float>("MinimoClockGhzGpu")
-                        .HasColumnType("real");
+                    b.Property<int>("MinimoClockGhzGpu")
+                        .HasColumnType("int");
 
                     b.Property<int>("MinimoNucleosCpu")
                         .HasColumnType("int");
@@ -581,7 +599,7 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("MinimoRamGb")
                         .HasColumnType("int");
 
-                    b.Property<int>("MinimoVRamGpuMb")
+                    b.Property<int>("MinimoVRamGpuGb")
                         .HasColumnType("int");
 
                     b.Property<int>("NivelDesempenho")

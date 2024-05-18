@@ -3,6 +3,6 @@ using SimuladorPC.Domain.Interfaces.Repositories;
 
 namespace SimuladorPC.Infrastructure.Data;
 
-public class RequisitosHardwareRepository(SimuladorPcContext context) : BaseRepository<Domain.Entities.Software.RequisitosHardware>(context), IRequisitosHardwareRepository
+public class RequisitosHardwareRepository(SimuladorPcContext context) : BaseRepository<RequisitosHardware>(context), IRequisitosHardwareRepository
 {
 }

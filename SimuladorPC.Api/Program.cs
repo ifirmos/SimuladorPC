@@ -1,13 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using SimuladorPC.Domain.Interfaces.Services;
-
 using SimuladorPC.Domain.Interfaces.Repositories;
 using System.Text.Json.Serialization;
 using SimuladorPC.Infrastructure.Repositories;
 using SimuladorPC.Domain.Services;
 using SimuladorPC.Infrastructure.Data;
-using SimuladorPC.Domain.Entities.Hardware;
-using SimuladorPC.Domain.Entities.Software;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +20,10 @@ builder.Services.AddDbContext<SimuladorPcContext>(options =>
 //Repositório base para todos os CRUD genéricos.
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
+
+//// Configurações futuras para o PC Builder
+builder.Services.AddScoped<IPcBuilderService, PcBuilderService>();
+
 //// Configurações futuras para CPU
 builder.Services.AddScoped<ICpuService, CpuService>();
 builder.Services.AddScoped<ICpuRepository, CpuRepository>();
@@ -31,6 +32,7 @@ builder.Services.AddScoped<ICpuRepository, CpuRepository>();
 builder.Services.AddScoped<IGpuService, GpuService>();
 builder.Services.AddScoped<IGpuRepository, GpuRepository>();
 
+builder.Services.AddScoped<IGabineteService, GabineteService>();
 builder.Services.AddScoped<IGabineteRepository, GabineteRepository>();
 
 //// Configurações futuras para Placa Mãe
