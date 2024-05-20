@@ -1,4 +1,6 @@
-﻿namespace SimuladorPC.Domain.Entities.Hardware;
+﻿using System.Net.Sockets;
+
+namespace SimuladorPC.Domain.Entities.Hardware;
 
 public class Cpu : Componente
 {
@@ -9,7 +11,7 @@ public class Cpu : Componente
     public int CacheL3 { get; private set; }
     public bool SuporteMultithreading { get; private set; }
     public string ConjuntoInstrucoes { get; private set; }
-    public int FrequenciaBoost { get; private set; }
+    public int FrequenciaBoostMhz { get; private set; }
     public int ConsumoEnergia { get; private set; }
     public bool GraficosIntegrados { get; private set; }
     public int TemperaturaMaxima { get; private set; }
@@ -22,8 +24,14 @@ public class Cpu : Componente
     public int Threads { get; private set; }
     public int FrequenciaBaseMhz { get; private set; }
     public int FrequenciaMaximaMhz { get; private set; }
-    public SocketProcessador Socket { get; private set; }
+    public virtual SocketProcessador Socket { get; private set; }
     public int SocketProcessadorId { get; private set; }
     public int Tdp { get; private set; }
+
+    public void SetSocket(SocketProcessador socket)
+    {
+        Socket = socket;
+        SocketProcessadorId = socket.Id;
+    }
 }
 

@@ -9,5 +9,6 @@ public interface IBaseRepository<T> where T : class
     void Update(T entity);
     void Delete(T entity);
     bool Any(Expression<Func<T, bool>> predicate);
+    public T Find(Expression<Func<T, bool>> predicate);
 }
 

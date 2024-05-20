@@ -38,7 +38,7 @@ public class AutoMappingConfig : Profile
         CreateMap<RequisitosHardware, RequisitosHardwareDto>()
              .ForMember(dest => dest.TecnologiasRequeridas,
                  opt => opt.MapFrom(src => src.TecnologiasRequeridas.Select(t => t.ToString()).ToList()))
-             .ForMember(dest => dest.Nivel,
+             .ForMember(dest => dest.NivelDesempenho,
                        opt => opt.MapFrom(src => src.NivelDesempenho.ToString()))
              .ReverseMap();
 

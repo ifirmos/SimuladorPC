@@ -16,14 +16,10 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class
     }
 
     public virtual IEnumerable<T> GetAll() => _entities;
-    public virtual T GetById(int id)
-    {
-        return _entities.Find(id);
-    }
-
+    public virtual T GetById(int id) => _entities.Find(id);
     public virtual void Add(T entity)
     {
-        _context.Set<T>().Add(entity);
+        _entities.Add(entity);
         _context.SaveChanges();
     }
     public virtual void Update(T entity)
@@ -31,13 +27,11 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class
         _entities.Update(entity);
         _context.SaveChanges();
     }
-    public void Delete(T entity)
+    public virtual void Delete(T entity)
     {
         _entities.Remove(entity);
         _context.SaveChanges();
     }
-    public bool Any(Expression<Func<T, bool>> predicate)
-    {
-        return _context.Set<T>().Any(predicate);
-    }
+    public virtual bool Any(Expression<Func<T, bool>> predicate) => _entities.Any(predicate);
+    public virtual T Find(Expression<Func<T, bool>> predicate) => _entities.FirstOrDefault(predicate);
 }

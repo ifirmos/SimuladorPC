@@ -42,4 +42,9 @@ public class SoftwareService : ISoftwareService
     {
         _softwareRepository.Delete(entity);
     }
+
+    public Software ObterSoftwarePorNome(string softwareNome)
+    {
+        return _softwareRepository.ObterSoftwarePorNome(softwareNome);
+    }
 }

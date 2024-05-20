@@ -9,5 +9,6 @@ public interface ISoftwareService
     Software AdicionarSoftware(Software software);
     void Update(Software entity);
     void Delete(Software entity);
+    Software ObterSoftwarePorNome(string softwareNome);
 }
 

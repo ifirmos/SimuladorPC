@@ -10,19 +10,21 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
     [Route("api/RequisitosHardware")]
     public class RequisitosHardwareController : ControllerBase
     {
-        private readonly IRequisitosHardwareService _RequisitosHardwareService;
+        private readonly IRequisitosHardwareService _requisitosHardwareService;
+        private readonly ISoftwareService _softwareService;
         private readonly IMapper _mapper;
 
-        public RequisitosHardwareController(IRequisitosHardwareService RequisitosHardwareService, IMapper mapper)
+        public RequisitosHardwareController(IRequisitosHardwareService requisitosHardwareService, ISoftwareService softwareService, IMapper mapper)
         {
-            _RequisitosHardwareService = RequisitosHardwareService;
+            _requisitosHardwareService = requisitosHardwareService;
+            _softwareService = softwareService;
             _mapper = mapper;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<RequisitosHardwareDto>> GetAll()
         {
-            var listaRequisitosHardware = _RequisitosHardwareService.GetAll();
+            var listaRequisitosHardware = _requisitosHardwareService.GetAll();
             var listaRequisitosHardwareDto = _mapper.Map<IEnumerable<RequisitosHardwareDto>>(listaRequisitosHardware);
             return Ok(listaRequisitosHardwareDto);
         }
@@ -30,60 +32,34 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
         [HttpGet("{id}")]
         public ActionResult<RequisitosHardwareDto> GetById(int id)
         {
-            var RequisitosHardware = _RequisitosHardwareService.GetById(id);
-            if (RequisitosHardware == null)
+            var requisitosHardware = _requisitosHardwareService.GetById(id);
+            if (requisitosHardware == null)
             {
                 return NotFound();
             }
-            var RequisitosHardwareDto = _mapper.Map<RequisitosHardwareDto>(RequisitosHardware);
-            return Ok(RequisitosHardwareDto);
+            var requisitosHardwareDto = _mapper.Map<RequisitosHardwareDto>(requisitosHardware);
+            return Ok(requisitosHardwareDto);
         }
 
         [HttpPost]
-        public ActionResult<RequisitosHardwareDto> Criar(RequisitosHardwareDto RequisitosHardwareDto)
+        public ActionResult<RequisitosHardwareDto> Criar(RequisitosHardwareDto requisitosHardwareDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            RequisitosHardware RequisitosHardware;
-            try
+            var software = _softwareService.GetById(requisitosHardwareDto.SoftwareId);
+            if (software == null)
             {
-                RequisitosHardware = _mapper.Map<RequisitosHardware>(RequisitosHardwareDto);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"Erro ao mapear o objeto: {ex.Message}");
+                return NotFound("Software não encontrado.");
             }
 
-            RequisitosHardware RequisitosHardwareCriado;
-            try
-            {
-                RequisitosHardwareCriado = _RequisitosHardwareService.Add(RequisitosHardware);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"Erro ao adicionar o objeto: {ex.Message}");
-            }
+            var requisitosHardware = _mapper.Map<RequisitosHardware>(requisitosHardwareDto);
+            var requisitosHardwareCriado = _requisitosHardwareService.Add(requisitosHardware);
+            var requisitosHardwareRetornoDto = _mapper.Map<RequisitosHardwareDto>(requisitosHardwareCriado);
 
-            if (RequisitosHardwareCriado == null)
-            {
-                return BadRequest("Não foi possível criar o objeto.");
-            }
-
-            RequisitosHardwareDto RequisitosHardwareRetornoDto;
-            try
-            {
-                RequisitosHardwareRetornoDto = _mapper.Map<RequisitosHardwareDto>(RequisitosHardwareCriado);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"Erro ao mapear para DTO: {ex.Message}");
-            }
-
-            return CreatedAtAction(nameof(GetById), new { id = RequisitosHardwareCriado.Id }, RequisitosHardwareRetornoDto);
+            return CreatedAtAction(nameof(GetById), new { id = requisitosHardwareCriado.Id }, requisitosHardwareRetornoDto);
         }
-
     }
 }

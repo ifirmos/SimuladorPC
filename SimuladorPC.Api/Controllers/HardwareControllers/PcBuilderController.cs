@@ -2,7 +2,8 @@
 using SimuladorPC.Domain.Entities.Software;
 using SimuladorPC.Domain.Enums;
 using SimuladorPC.Domain.Interfaces.Services;
-using System.Threading.Tasks;
+using SimuladorPC.Application.DTO;
+using AutoMapper;
 
 namespace SimuladorPC.Api.Controllers
 {
@@ -11,18 +12,23 @@ namespace SimuladorPC.Api.Controllers
     public class PcBuilderController : ControllerBase
     {
         private readonly IPcBuilderService _pcBuilderService;
+        private readonly ISoftwareService _softwareService;
+        private readonly IMapper _mapper;
 
-        public PcBuilderController(IPcBuilderService pcBuilderService)
+        public PcBuilderController(IPcBuilderService pcBuilderService, ISoftwareService softwareService, IMapper mapper)
         {
             _pcBuilderService = pcBuilderService;
+            _softwareService = softwareService;
+            _mapper = mapper;
         }
 
         [HttpPost("build")]
-        public async Task<IActionResult> BuildPc([FromBody] BuildPcRequest request)
+        public async Task<IActionResult> BuildPc(string softwareNome)
         {
             try
             {
-                var setupPc = _pcBuilderService.AutoBuildPcConfiguration(request.Software);
+                var software = _softwareService.ObterSoftwarePorNome(softwareNome);
+                var setupPc = _pcBuilderService.AutoBuildPcConfiguration(software);
 
                 if (setupPc == null)
                 {

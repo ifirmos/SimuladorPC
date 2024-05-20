@@ -16,7 +16,10 @@ namespace SimuladorPC.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.4")
+                .HasAnnotation("ProductVersion", "8.0.5")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -76,7 +79,7 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("FrequenciaBaseMhz")
                         .HasColumnType("int");
 
-                    b.Property<int>("FrequenciaBoost")
+                    b.Property<int>("FrequenciaBoostMhz")
                         .HasColumnType("int");
 
                     b.Property<int>("FrequenciaMaximaMhz")
@@ -243,10 +246,10 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FrequenciaBase")
+                    b.Property<int>("FrequenciaBaseMhz")
                         .HasColumnType("int");
 
-                    b.Property<int>("FrequenciaMax")
+                    b.Property<int>("FrequenciaMaxMhz")
                         .HasColumnType("int");
 
                     b.Property<string>("Modelo")
@@ -269,7 +272,7 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("QtdCoolers")
                         .HasColumnType("int");
 
-                    b.Property<int>("QtdMemoriaGb")
+                    b.Property<int>("QtdMemoriaEmGb")
                         .HasColumnType("int");
 
                     b.Property<string>("TecnologiasSuportadas")
@@ -288,7 +291,7 @@ namespace SimuladorPC.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Capacidade")
+                    b.Property<int>("CapacidadeGb")
                         .HasColumnType("int");
 
                     b.Property<string>("Fabricante")
@@ -423,9 +426,8 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<bool>("Rgb")
                         .HasColumnType("bit");
 
-                    b.Property<string>("TipoMemoria")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("TipoMemoriaId")
+                        .HasColumnType("int");
 
                     b.Property<double>("Voltagem")
                         .HasColumnType("float");
@@ -434,6 +436,8 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TipoMemoriaId");
 
                     b.ToTable("Rams");
                 });
@@ -490,10 +494,10 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("VelocidadeEscrita")
+                    b.Property<int>("VelocidadeEscritaEmMbps")
                         .HasColumnType("int");
 
-                    b.Property<int>("VelocidadeLeitura")
+                    b.Property<int>("VelocidadeLeituraEmMbps")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -587,10 +591,10 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("MinimoArmazenamentoGb")
                         .HasColumnType("int");
 
-                    b.Property<int>("MinimoClockGhzCpu")
+                    b.Property<int>("MinimoClockCpuMhz")
                         .HasColumnType("int");
 
-                    b.Property<int>("MinimoClockGhzGpu")
+                    b.Property<int>("MinimoClockGpuMhz")
                         .HasColumnType("int");
 
                     b.Property<int>("MinimoNucleosCpu")
@@ -694,6 +698,17 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Navigation("SocketProcessador");
 
                     b.Navigation("TamanhoPlacaMae");
+
+                    b.Navigation("TipoMemoria");
+                });
+
+            modelBuilder.Entity("SimuladorPC.Domain.Entities.Hardware.Ram", b =>
+                {
+                    b.HasOne("SimuladorPC.Domain.Entities.Hardware.TipoMemoria", "TipoMemoria")
+                        .WithMany()
+                        .HasForeignKey("TipoMemoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("TipoMemoria");
                 });

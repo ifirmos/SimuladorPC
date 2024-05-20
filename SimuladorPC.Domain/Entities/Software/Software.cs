@@ -5,5 +5,5 @@ public class Software
     public string Nome { get; private set; }
     public string Versao { get; private set; }
     public string Descricao { get; private set; }
-    public IEnumerable<RequisitosHardware> Requisitos { get; set; }
+    public virtual IEnumerable<RequisitosHardware> Requisitos { get; set; }
 }

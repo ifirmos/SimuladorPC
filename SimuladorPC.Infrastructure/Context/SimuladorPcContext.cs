@@ -26,6 +26,11 @@ public class SimuladorPcContext : DbContext
     public SimuladorPcContext(DbContextOptions<SimuladorPcContext> options) : base(options)
     {
     }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder
+            .UseLazyLoadingProxies();
+    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -34,6 +39,5 @@ public class SimuladorPcContext : DbContext
         modelBuilder.ApplyConfiguration(new RequisitosHardwareConfiguration());
         modelBuilder.ApplyConfiguration(new PlacaMaeConfiguration());
         modelBuilder.ApplyConfiguration(new ChipsetConfiguration());
-
     }
 }

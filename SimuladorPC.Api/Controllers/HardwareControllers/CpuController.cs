@@ -42,47 +42,10 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
         [HttpPost]
         public ActionResult<CpuDto> Criar(CpuDto cpuDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState); // Retorna os erros de validação
-            }
-
-            Cpu cpu;
-            try
-            {
-                cpu = _mapper.Map<Cpu>(cpuDto);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"Erro ao mapear o objeto: {ex.Message}");
-            }
-
-            Cpu cpuCriado;
-            try
-            {
-                cpuCriado = _cpuService.Add(cpu);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"Erro ao adicionar o cpu: {ex.Message}");
-            }
-
-            if (cpuCriado == null)
-            {
-                return BadRequest("Não foi possível criar o cpu.");
-            }
-
-            CpuDto cpuRetornoDto;
-            try
-            {
-                cpuRetornoDto = _mapper.Map<CpuDto>(cpuCriado);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"Erro ao mapear o cpu criado para DTO: {ex.Message}");
-            }
-
-            return CreatedAtAction(nameof(GetById), new { id = cpuCriado.Id }, cpuRetornoDto);
+            var cpu = _mapper.Map<Cpu>(cpuDto);
+            _cpuService.Add(cpu);
+            var cpuDtoCriado = _mapper.Map<CpuDto>(cpu);
+            return Ok(cpuDtoCriado);
         }
 
     }

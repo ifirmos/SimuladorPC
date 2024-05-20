@@ -28,6 +28,10 @@ builder.Services.AddScoped<IPcBuilderService, PcBuilderService>();
 builder.Services.AddScoped<ICpuService, CpuService>();
 builder.Services.AddScoped<ICpuRepository, CpuRepository>();
 
+builder.Services.AddScoped<ISocketProcessadorRepository, SocketProcessadorRepository>();
+
+
+
 //// Configurações futuras para GPU
 builder.Services.AddScoped<IGpuService, GpuService>();
 builder.Services.AddScoped<IGpuRepository, GpuRepository>();
@@ -44,7 +48,7 @@ builder.Services.AddScoped<ISoftwareRepository, SoftwareRepository>();
 
 //// Configurações futuras para RAM
 builder.Services.AddScoped<IRamService, RamService>();
-//builder.Services.AddScoped<IBaseRepository<Ram>, RamRepository>();
+builder.Services.AddScoped<IRamRepository, RamRepository>();
 
 //// Configurações futuras para Requisitos de Hardware
 builder.Services.AddScoped<IRequisitosHardwareService, RequisitosHardwareService>();

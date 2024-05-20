@@ -40,7 +40,7 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
         }
 
         [HttpPost]
-        public ActionResult<RamDto> Criar(RamDto RamDto)
+        public ActionResult<RamDto>AdicionarRam(RamDto RamDto)
         {
             if (!ModelState.IsValid)
             {
@@ -57,17 +57,17 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
                 return BadRequest($"Erro ao mapear o objeto: {ex.Message}");
             }
 
-            Ram RamCriado;
+            Ram RamCriada;
             try
             {
-                RamCriado = _RamService.Add(Ram);
+                RamCriada = _RamService.Add(Ram);
             }
             catch (Exception ex)
             {
                 return BadRequest($"Erro ao adicionar o objeto: {ex.Message}");
             }
 
-            if (RamCriado == null)
+            if (RamCriada == null)
             {
                 return BadRequest("Não foi possível criar o objeto.");
             }
@@ -75,14 +75,14 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
             RamDto RamRetornoDto;
             try
             {
-                RamRetornoDto = _mapper.Map<RamDto>(RamCriado);
+                RamRetornoDto = _mapper.Map<RamDto>(RamCriada);
             }
             catch (Exception ex)
             {
                 return BadRequest($"Erro ao mapear para DTO: {ex.Message}");
             }
 
-            return CreatedAtAction(nameof(GetById), new { id = RamCriado.Id }, RamRetornoDto);
+            return CreatedAtAction(nameof(GetById), new { id = RamCriada.Id }, RamRetornoDto);
         }
 
     }

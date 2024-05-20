@@ -11,7 +11,7 @@ public class CpuDto : ComponenteDto
     public int CacheL3 { get;set; }
     public bool SuporteMultithreading { get;set; }
     public string ConjuntoInstrucoes { get;set; }
-    public int FrequenciaBoost { get;set; }
+    public int FrequenciaBoostMhz { get;set; }
     public int ConsumoEnergia { get;set; }
     public bool GraficosIntegrados { get;set; }
     public int TemperaturaMaxima { get;set; }
