@@ -16,6 +16,7 @@ public class PcBuilderService : IPcBuilderService
 
     public SetupPc AutoBuildPcConfiguration(Software software)
     {
+        
         var setupPc = new SetupPc();
         try
         {
@@ -25,15 +26,15 @@ public class PcBuilderService : IPcBuilderService
 
             setupPc.PlacaMae = ObterPlacaMaeCompativel(software, setupPc);
 
-            setupPc.Rams = ObterRamsCompativeis(software, setupPc);
+            setupPc.Rams.Add(ObterRamsCompativeis(software, setupPc));
 
-            setupPc.Ssds = ObterSsdsCompativeis(software, setupPc);
+            setupPc.Ssds.Add(ObterSsdsCompativeis(software, setupPc));
 
             setupPc.Gabinete = ObterGabineteAdequado(software, setupPc);
 
-            setupPc.WaterCooler = ObterWaterCoolerCompativel(software, setupPc);
+            //setupPc.WaterCooler = ObterWaterCoolerCompativel(software, setupPc);
 
-            setupPc.Fonte = ObterFonteAdequada(software, setupPc);
+            //setupPc.Fonte = ObterFonteAdequada(software, setupPc);
         }
         catch (Exception ex)
         {
@@ -58,23 +59,21 @@ public class PcBuilderService : IPcBuilderService
 
     private PlacaMae ObterPlacaMaeCompativel(Software software, SetupPc setupPc)
     {
-        var placaMae = _softwareRepository.ObterPlacaMaeCompativel(software, setupPc);
+        var placaMae = _softwareRepository.ObterPlacaMaeCompativel(setupPc);
         if (placaMae == null) throw new InvalidOperationException("Nenhuma Placa Mãe compatível encontrada.");
         return placaMae;
     }
 
-    private IEnumerable<Ram> ObterRamsCompativeis(Software software, SetupPc setupPc)
+    private Ram ObterRamsCompativeis(Software software, SetupPc setupPc)
     {
-        var rams = _softwareRepository.ObterRamsCompativeis(software, setupPc);
-        if (!rams.Any()) throw new InvalidOperationException("Nenhuma RAM compatível encontrada.");
-        return rams;
+        var ram = _softwareRepository.ObterRamCompativel(software, setupPc);
+        return ram;
     }
 
-    private IEnumerable<Ssd> ObterSsdsCompativeis(Software software, SetupPc setupPc)
+    private Ssd ObterSsdsCompativeis(Software software, SetupPc setupPc)
     {
-        var ssds = _softwareRepository.ObterSsdsCompativeis(software, setupPc);
-        if (!ssds.Any()) throw new InvalidOperationException("Nenhum SSD compatível encontrado.");
-        return ssds;
+        var ssd = _softwareRepository.ObterSsdCompativel(software, setupPc);
+        return ssd;
     }
 
     private Gabinete ObterGabineteAdequado(Software software, SetupPc setupPc)

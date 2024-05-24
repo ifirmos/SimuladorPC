@@ -1,9 +1,7 @@
-using SimuladorPC.Domain.Entities.Hardware;
-
 namespace SimuladorPC.Application.DTO;
 
-public class WaterCooler : Componente
+public class WaterCoolerDto : ComponenteDto
 {
-    public string TamanhoRadiador { get; private set; }
-    public int QuantidadeFans { get; private set; }
+    public int TamanhoRadiador_mm { get;  set; }
+    public int QuantidadeFans { get;  set; }
 }

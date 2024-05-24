@@ -27,18 +27,12 @@ public class CpuService : ComponenteService<Cpu>, ICpuService
         _cpuRepository.Add(cpu);
         return cpu;
     }
-    public IEnumerable<Cpu> ObterCPUsCompativeisPorSocket(string tipoSocket)
+    public IEnumerable<Cpu> ObterCpusCompativeis(SetupPc setupPc)
     {
-        return _cpuRepository.ObterCPUsCompativeisPorSocket(tipoSocket);
-    }
-    public override IEnumerable<Cpu> GetAll()
-    {
-        return _cpuRepository.GetAll();
-    }
+        var cpus = _cpuRepository.GetAll();
 
-    public override Cpu GetById(int id)
-    {
-        return _cpuRepository.GetById(id);
+        return cpus.Where(cpu =>
+            setupPc.PlacaMae == null || setupPc.PlacaMae.SocketProcessador.Equals(cpu.Socket));
     }
 }
 

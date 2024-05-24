@@ -10,9 +10,9 @@ public interface ISoftwareRepository : IBaseRepository<Software>
     Fonte ObterFonteAdequada(Software software, SetupPc setupPc);
     Gabinete ObterGabineteAdequado(Software software, SetupPc setupPc);
     Gpu ObterGpuCompativel(Software software, SetupPc setupPc);
-    PlacaMae ObterPlacaMaeCompativel(Software software, SetupPc setupPc);
-    IEnumerable<Ram> ObterRamsCompativeis(Software software, SetupPc setupPc);
+    PlacaMae ObterPlacaMaeCompativel(SetupPc setupPc);
+    Ram ObterRamCompativel(Software software, SetupPc setupPc);
     Software ObterSoftwarePorNome(string softwareNome);
-    IEnumerable<Ssd> ObterSsdsCompativeis(Software software, SetupPc setupPc);
+    Ssd ObterSsdCompativel(Software software, SetupPc setupPc);
     WaterCooler? ObterWaterCoolerCompativel(Software software, SetupPc setupPc);
 }

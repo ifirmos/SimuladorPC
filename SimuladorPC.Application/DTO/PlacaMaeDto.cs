@@ -1,4 +1,4 @@
-﻿using SimuladorPC.Domain.Entities.Hardware;
+﻿using SimuladorPC.Domain.Enums;
 
 namespace SimuladorPC.Application.DTO;
 
@@ -14,5 +14,5 @@ public class PlacaMaeDto : ComponenteDto
     public int TipoMemoriaId { get; private set; }
     public int SlotsMemoria { get; set; }
     public int MaxMemoriaSuportadaGb { get; set; }
-
+    public virtual ICollection<PciExpressSlotDto> PciExpressSlots { get; set; }
 }

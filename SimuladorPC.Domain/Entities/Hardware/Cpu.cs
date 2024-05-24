@@ -26,6 +26,7 @@ public class Cpu : Componente
     public int FrequenciaMaximaMhz { get; private set; }
     public virtual SocketProcessador Socket { get; private set; }
     public int SocketProcessadorId { get; private set; }
+    public int PontuacaoCpuMark { get; private set; }
     public int Tdp { get; private set; }
 
     public void SetSocket(SocketProcessador socket)

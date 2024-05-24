@@ -22,6 +22,7 @@ public class AutoMappingConfig : Profile
         CreateMap<TamanhoPlacaMae, TamanhoPlacaMaeDto>().ReverseMap();
 
         CreateMap<Ssd, SsdDto>().ReverseMap();
+        CreateMap<PciExpressSlot, PciExpressSlotDto>().ReverseMap();
 
 
         CreateMap<PlacaMae, PlacaMaeDto>()
@@ -29,6 +30,7 @@ public class AutoMappingConfig : Profile
              .ForMember(dest => dest.Chipset, opt => opt.MapFrom(src => src.Chipset))
              .ForMember(dest => dest.TipoMemoria, opt => opt.MapFrom(src => src.TipoMemoria))
              .ForMember(dest => dest.TamanhoPlacaMae, opt => opt.MapFrom(src => src.TamanhoPlacaMae))
+             .ForMember(dest => dest.PciExpressSlots, opt => opt.MapFrom(src => src.PciExpressSlots))
              .ReverseMap();
 
         CreateMap<Software, SoftwareDto>()

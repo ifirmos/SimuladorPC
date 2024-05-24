@@ -2,6 +2,6 @@
 
 public class WaterCooler : Componente
 {
-    public string TamanhoRadiador { get; private set; }
+    public int TamanhoRadiador_mm { get; private set; }
     public int QuantidadeFans { get; private set; }
 }

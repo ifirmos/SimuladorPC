@@ -15,7 +15,7 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class
         _entities = context.Set<T>();
     }
 
-    public virtual IEnumerable<T> GetAll() => _entities;
+    public virtual IEnumerable<T> GetAll() => _entities.ToList();
     public virtual T GetById(int id) => _entities.Find(id);
     public virtual void Add(T entity)
     {
@@ -34,4 +34,5 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class
     }
     public virtual bool Any(Expression<Func<T, bool>> predicate) => _entities.Any(predicate);
     public virtual T Find(Expression<Func<T, bool>> predicate) => _entities.FirstOrDefault(predicate);
+    public virtual IQueryable<T> GetAllAsQueryable() => _entities.AsQueryable();
 }

@@ -13,14 +13,4 @@ public class GpuService : ComponenteService<Gpu>, IGpuService
     {
         _gpuRepository = gpuRepository;
     }
-
-    public override IEnumerable<Gpu> GetAll()
-    {
-        return _gpuRepository.GetAll();
-    }
-
-    public override Gpu GetById(int id)
-    {
-        return _gpuRepository.GetById(id);
-    }
 }

@@ -11,14 +11,14 @@ public class PlacaMaeRepository : BaseRepository<PlacaMae>, IPlacaMaeRepository
     {
     }
 
-    public override IEnumerable<PlacaMae> GetAll()
-    {
-        return _entities
-            .Include(p => p.Chipset)
-            .Include(p => p.TamanhoPlacaMae)
-            .Include(p => p.SocketProcessador)
-            .Include(p => p.TipoMemoria);
-    }
+    //public override IEnumerable<PlacaMae> GetAll()
+    //{
+    //    return _entities
+    //        .Include(p => p.Chipset)
+    //        .Include(p => p.TamanhoPlacaMae)
+    //        .Include(p => p.SocketProcessador)
+    //        .Include(p => p.TipoMemoria);
+    //}
 
     public override PlacaMae GetById(int id)
     {
@@ -26,6 +26,7 @@ public class PlacaMaeRepository : BaseRepository<PlacaMae>, IPlacaMaeRepository
                         .Include(p => p.TamanhoPlacaMae)
                         .Include(p => p.SocketProcessador)
                         .Include(p => p.TipoMemoria)
+                        .Include(p => p.PciExpressSlots)
                         .SingleOrDefault(p => p.Id == id);
     }
     public IEnumerable<PlacaMae> BuscaPorSocket(int socketId)
@@ -66,4 +67,25 @@ public class PlacaMaeRepository : BaseRepository<PlacaMae>, IPlacaMaeRepository
             .Where(pm => pm.ChipsetId == chipsetId)
             .ToList();
     }
+    public bool VerificarCpuCompativel(PlacaMae placaMae, Cpu cpu)
+    {
+        return placaMae.SocketProcessadorId == cpu.SocketProcessadorId;
+    }
+
+    public bool VerificarGpuCompativel(PlacaMae placaMae, Gpu gpu)
+    {
+        return placaMae.PciExpressSlots.Any(slot => slot.VersaoPcie >= gpu.VersaoPcie);
+    }
+
+    public bool VerificarGabineteCompativel(PlacaMae placaMae, Gabinete gabinete)
+    {
+        // Adicione lógica específica para verificar compatibilidade com o gabinete, se aplicável
+        return true;
+    }
+
+    public bool VerificarSsdCompativel(PlacaMae placaMae, Ssd ssd)
+    {
+        // Adicione lógica específica para verificar compatibilidade com SSD, se aplicável
+        return true;
+    }    
 }

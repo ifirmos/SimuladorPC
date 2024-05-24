@@ -11,12 +11,6 @@ public class RequisitosHardwareConfiguration : IEntityTypeConfiguration<Requisit
 
         // Campos obrigatórios
         builder.Property(r => r.SoftwareId).IsRequired();
-
-        // Configuração da relação
-        builder.HasOne(r => r.Software)
-               .WithMany(s => s.Requisitos)
-               .HasForeignKey(r => r.SoftwareId)
-               .OnDelete(DeleteBehavior.Cascade);
     }
 }
 

@@ -18,6 +18,11 @@ namespace SimuladorPC.Data.Configurations
             builder.HasOne(p => p.Chipset).WithMany().HasForeignKey(p => p.ChipsetId).IsRequired().OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(p => p.TamanhoPlacaMae).WithMany().HasForeignKey(p => p.TamanhoPlacaMaeId).IsRequired().OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(p => p.TipoMemoria).WithMany().HasForeignKey(p => p.TipoMemoriaId).IsRequired().OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(p => p.PciExpressSlots)
+                   .WithOne()
+                   .HasForeignKey(s => s.PlacaMaeId)
+                   .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

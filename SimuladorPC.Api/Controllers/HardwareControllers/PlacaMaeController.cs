@@ -28,13 +28,13 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
             return Ok(placaMaesDto);
         }
 
-        [HttpGet("cpusCompativeis/{placaMaeId}")]
-        public ActionResult<IEnumerable<Cpu>> ListarCpusCompativeis(int placaMaeId)
-        {            
-            var processadoresCompativeis = _placaMaeService.ListarCpusCompativeis(placaMaeId);
-            var processadoresCompativeisDto = _mapper.Map<IEnumerable<CpuDto>>(processadoresCompativeis);
-            return Ok(processadoresCompativeisDto);
-        }
+        //[HttpGet("cpusCompativeis/{placaMaeId}")] Refatorar
+        //public ActionResult<IEnumerable<Cpu>> ListarCpusCompativeis(int placaMaeId)
+        //{            
+        //    var processadoresCompativeis = _placaMaeService.ListarCpusCompativeis(placaMaeId);
+        //    var processadoresCompativeisDto = _mapper.Map<IEnumerable<CpuDto>>(processadoresCompativeis);
+        //    return Ok(processadoresCompativeisDto);
+        //}
 
         [HttpGet("{id}")]
         public ActionResult<PlacaMaeDto> GetById(int id)

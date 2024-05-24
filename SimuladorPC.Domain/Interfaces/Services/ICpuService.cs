@@ -4,5 +4,5 @@ namespace SimuladorPC.Domain.Interfaces.Services;
 
 public interface ICpuService : IComponenteService<Cpu>
 {
-    IEnumerable<Cpu> ObterCPUsCompativeisPorSocket(string socketType);
+    public IEnumerable<Cpu> ObterCpusCompativeis(SetupPc setupPc);
 }

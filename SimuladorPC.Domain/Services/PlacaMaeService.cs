@@ -1,5 +1,4 @@
 ﻿using SimuladorPC.Domain.Entities.Hardware;
-using SimuladorPC.Domain.Entities.Software;
 using SimuladorPC.Domain.Interfaces.Repositories;
 using SimuladorPC.Domain.Interfaces.Services;
 
@@ -72,8 +71,22 @@ public class PlacaMaeService : ComponenteService<PlacaMae>, IPlacaMaeService
         return placaMae;
     }
 
-    public IEnumerable<Cpu> ListarCpusCompativeis(int placaMaeId)
+    public bool VerificarCpuCompativel(PlacaMae placaMae, Cpu cpu)
     {
-        throw new NotImplementedException();
+        return placaMae.SocketProcessadorId == cpu.SocketProcessadorId;
+    }
+    public bool VerificarGpuCompativel(PlacaMae placaMae, Gpu gpu)
+    {
+        return placaMae.PciExpressSlots.Any(slot => slot.VersaoPcie >= gpu.VersaoPcie);
+    }
+    public bool VerificarGabineteCompativel(PlacaMae placaMae, Gabinete gabinete)
+    {
+        // Refatorar -> lógica específica para verificar compatibilidade com o gabinete
+        return true; // true por enquanto
+    }
+    public bool VerificarSsdCompativel(PlacaMae placaMae, Ssd ssd)
+    {
+        // Refatorar -> lógica específica para verificar compatibilidade
+        return true; 
     }
 }

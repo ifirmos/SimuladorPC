@@ -24,6 +24,7 @@ public class CpuDto : ComponenteDto
     public int Threads { get;set; }
     public int FrequenciaBaseMhz { get;set; }
     public int FrequenciaMaximaMhz { get;set; }
+    public int PontuacaoCpuMark { get; set; }
     public SocketProcessadorDto Socket { get;set; }
     public int Tdp { get;set; }
 }

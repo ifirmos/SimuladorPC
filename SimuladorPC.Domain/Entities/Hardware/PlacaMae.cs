@@ -1,4 +1,6 @@
 ﻿
+using SimuladorPC.Domain.Enums;
+
 namespace SimuladorPC.Domain.Entities.Hardware;
 public class PlacaMae : Componente
 {
@@ -12,7 +14,8 @@ public class PlacaMae : Componente
     public int TipoMemoriaId { get; private set; }
     public int SlotsMemoria { get; private set; }
     public int MaxMemoriaSuportadaGb { get; private set; }
-    
+    public virtual ICollection<PciExpressSlot> PciExpressSlots { get; private set; }
+
     public void SetChipset(Chipset chipset)
     {
         Chipset = chipset;
@@ -34,5 +37,9 @@ public class PlacaMae : Componente
     {
         TipoMemoria = tipoMemoria;
         TipoMemoriaId = tipoMemoria.Id;
+    }
+    public void AdicionarPciExpressSlot(PciExpressSlot pciExpressSlot)
+    {
+        PciExpressSlots.Add(pciExpressSlot);
     }
 }

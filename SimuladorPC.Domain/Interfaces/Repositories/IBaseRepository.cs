@@ -4,6 +4,7 @@ namespace SimuladorPC.Domain.Interfaces.Repositories;
 public interface IBaseRepository<T> where T : class
 {
     IEnumerable<T> GetAll();
+    IQueryable<T> GetAllAsQueryable();
     T GetById(int id);
     void Add(T entity);
     void Update(T entity);
