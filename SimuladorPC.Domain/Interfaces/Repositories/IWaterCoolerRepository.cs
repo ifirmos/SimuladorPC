@@ -2,6 +2,6 @@
 
 namespace SimuladorPC.Domain.Interfaces.Repositories;
 
-public interface ISocketProcessadorRepository : IBaseRepository<SocketProcessador>
+public interface IWaterCoolerRepository : IBaseRepository<WaterCooler>
 {
 }

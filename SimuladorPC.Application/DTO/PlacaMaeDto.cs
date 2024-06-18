@@ -4,8 +4,7 @@ namespace SimuladorPC.Application.DTO;
 
 public class PlacaMaeDto : ComponenteDto
 {
-    public virtual SocketProcessadorDto SocketProcessador { get; set; }
-    public int SocketProcessadorId { get; private set; }
+    public virtual SocketProcessador SocketProcessador { get; set; }
     public virtual ChipsetDto Chipset { get; set; }
     public int ChipsetId { get; private set; }
     public virtual TamanhoPlacaMaeDto TamanhoPlacaMae { get; set; }

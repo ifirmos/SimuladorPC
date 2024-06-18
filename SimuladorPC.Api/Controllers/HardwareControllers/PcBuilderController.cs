@@ -43,10 +43,4 @@ namespace SimuladorPC.Api.Controllers
             }
         }
     }
-
-    public class BuildPcRequest
-    {
-        public Software Software { get; set; }
-        public NivelDesempenho DesempenhoNivel { get; set; }
-    }
 }

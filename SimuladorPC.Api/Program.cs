@@ -17,54 +17,36 @@ builder.Services.AddControllers()
 builder.Services.AddDbContext<SimuladorPcContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SimuladorPcDatabase")));
 
-//Repositório base para todos os CRUD genéricos.
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-
-
-//// Configurações futuras para o PC Builder
-builder.Services.AddScoped<IPcBuilderService, PcBuilderService>();
-
-//// Configurações futuras para CPU
-builder.Services.AddScoped<ICpuService, CpuService>();
 builder.Services.AddScoped<ICpuRepository, CpuRepository>();
-
-builder.Services.AddScoped<ISocketProcessadorRepository, SocketProcessadorRepository>();
-
-
-
-//// Configurações futuras para GPU
-builder.Services.AddScoped<IGpuService, GpuService>();
 builder.Services.AddScoped<IGpuRepository, GpuRepository>();
-
-builder.Services.AddScoped<IGabineteService, GabineteService>();
 builder.Services.AddScoped<IGabineteRepository, GabineteRepository>();
-
-//// Configurações futuras para Placa Mãe
-builder.Services.AddScoped<IPlacaMaeService, PlacaMaeService>();
-builder.Services.AddScoped<IPlacaMaeRepository, PlacaMaeRepository>();
-
-builder.Services.AddScoped<ISoftwareService, SoftwareService>();
-builder.Services.AddScoped<ISoftwareRepository, SoftwareRepository>();
-
-//// Configurações futuras para RAM
-builder.Services.AddScoped<IRamService, RamService>();
-builder.Services.AddScoped<IRamRepository, RamRepository>();
-
-//// Configurações futuras para Requisitos de Hardware
 builder.Services.AddScoped<IRequisitosHardwareService, RequisitosHardwareService>();
-//builder.Services.AddScoped<IBaseRepository<RequisitosHardware>, RequisitosHardwareRepository>();
+builder.Services.AddScoped<IRamRepository, RamRepository>();
+builder.Services.AddScoped<IPlacaMaeRepository, PlacaMaeRepository>();
+builder.Services.AddScoped<ISoftwareRepository, SoftwareRepository>();
+builder.Services.AddScoped<IWaterCoolerRepository, WaterCoolerRepository>();
 
-//// Configurações futuras para SSD
-builder.Services.AddScoped<ISsdService, SsdService>();
-//builder.Services.AddScoped<IBaseRepository<Ssd>, SsdRepository>();
-
-//// Configurações futuras para Fonte
-builder.Services.AddScoped<IFonteService, FonteService>();
-//builder.Services.AddScoped<IBaseRepository<Fonte>, FonteRepository>();
-
-//// Configurações futuras para Software
+builder.Services.AddScoped<ICpuService, CpuService>();
+builder.Services.AddScoped<IGpuService, GpuService>();
+builder.Services.AddScoped<IGabineteService, GabineteService>();
+builder.Services.AddScoped<IPlacaMaeService, PlacaMaeService>();
 builder.Services.AddScoped<ISoftwareService, SoftwareService>();
-//builder.Services.AddScoped<IBaseRepository<Software>, SoftwareRepository>();
+builder.Services.AddScoped<IRamService, RamService>();
+builder.Services.AddScoped<ISsdService, SsdService>();
+builder.Services.AddScoped<IFonteService, FonteService>();
+builder.Services.AddScoped<IWaterCoolerService, WaterCoolerService>();
+builder.Services.AddScoped<IPcBuilderService, PcBuilderService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -81,6 +63,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowAllOrigins");
 
 app.UseAuthorization();
 

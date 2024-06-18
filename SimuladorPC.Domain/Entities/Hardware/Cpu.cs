@@ -1,10 +1,10 @@
-﻿using System.Net.Sockets;
+﻿using SimuladorPC.Domain.Enums;
 
 namespace SimuladorPC.Domain.Entities.Hardware;
 
 public class Cpu : Componente
 {
-    public string LinhaProduto { get; private set; }
+    public string LinhaProduto { get; private set; } // Core, Ryzen, Threadripper, Etc.
     public int TecnologiaFabricacao { get; private set; } // Nanômetros
     public int CacheL1 { get; private set; }
     public int CacheL2 { get; private set; }
@@ -18,21 +18,19 @@ public class Cpu : Componente
     public string SuporteMemoria { get; private set; }
     public int NumeroCanaisMemoria { get; private set; }
     public string Plataforma { get; private set; }
-    public string PcieVersao { get; private set; }
+    public VersaoPcie VersaoPcie { get; private set; }
     public int PcieLanes { get; private set; }
     public int Nucleos { get; private set; }
     public int Threads { get; private set; }
     public int FrequenciaBaseMhz { get; private set; }
     public int FrequenciaMaximaMhz { get; private set; }
-    public virtual SocketProcessador Socket { get; private set; }
-    public int SocketProcessadorId { get; private set; }
+    public SocketProcessador SocketProcessador { get; private set; }
     public int PontuacaoCpuMark { get; private set; }
     public int Tdp { get; private set; }
 
     public void SetSocket(SocketProcessador socket)
     {
-        Socket = socket;
-        SocketProcessadorId = socket.Id;
+        SocketProcessador = socket;
     }
 }
 

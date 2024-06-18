@@ -9,7 +9,8 @@
         public virtual ICollection<Ssd> Ssds { get; set; }
         public virtual Fonte Fonte { get; set; }
         public virtual Gabinete Gabinete { get; set; }
-        public virtual WaterCooler? WaterCooler { get; set; }
+        public virtual WaterCooler WaterCooler { get; set; }
+        public int ConsumoMaximoTotalEmWatts { get; set; } = 600;
 
         public SetupPc()
         {

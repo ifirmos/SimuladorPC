@@ -11,8 +11,8 @@ using SimuladorPC.Infrastructure.Data;
 namespace SimuladorPC.Infrastructure.Migrations
 {
     [DbContext(typeof(SimuladorPcContext))]
-    [Migration("20240523223910_NivelDesempenhoEnum")]
-    partial class NivelDesempenhoEnum
+    [Migration("20240526002023_RemovidaEntidadeSocketProcessador")]
+    partial class RemovidaEntidadeSocketProcessador
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,15 +112,14 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("PcieLanes")
                         .HasColumnType("int");
 
-                    b.Property<string>("PcieVersao")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Plataforma")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SocketProcessadorId")
+                    b.Property<int>("PontuacaoCpuMark")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SocketProcessador")
                         .HasColumnType("int");
 
                     b.Property<string>("SuporteMemoria")
@@ -142,9 +141,10 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("Threads")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("VersaoPcie")
+                        .HasColumnType("int");
 
-                    b.HasIndex("SocketProcessadorId");
+                    b.HasKey("Id");
 
                     b.ToTable("Cpus");
                 });
@@ -191,8 +191,8 @@ namespace SimuladorPC.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<double>("Altura")
-                        .HasColumnType("float");
+                    b.Property<int>("Altura_Cm")
+                        .HasColumnType("int");
 
                     b.Property<int>("BaiasExternas")
                         .HasColumnType("int");
@@ -200,8 +200,8 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("BaiasInternas")
                         .HasColumnType("int");
 
-                    b.Property<double>("Comprimento")
-                        .HasColumnType("float");
+                    b.Property<int>("Comprimento_Cm")
+                        .HasColumnType("int");
 
                     b.Property<string>("CorGabinete")
                         .IsRequired()
@@ -215,8 +215,8 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Largura")
-                        .HasColumnType("float");
+                    b.Property<int>("Largura_Cm")
+                        .HasColumnType("int");
 
                     b.Property<string>("Modelo")
                         .IsRequired()
@@ -226,8 +226,11 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("PesoEmKg")
+                    b.Property<float>("Peso_Kg")
                         .HasColumnType("real");
+
+                    b.Property<int>("SuporteRadiador_mm")
+                        .HasColumnType("int");
 
                     b.Property<bool>("TemJanela")
                         .HasColumnType("bit");
@@ -244,6 +247,12 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("Comprimento")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Comprimento_Cm")
+                        .HasColumnType("int");
 
                     b.Property<string>("Fabricante")
                         .IsRequired()
@@ -262,6 +271,9 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Peso_Kg")
+                        .HasColumnType("real");
 
                     b.Property<int>("PontuacaoPassMarkG3D")
                         .HasColumnType("int");
@@ -404,7 +416,7 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("SlotsMemoria")
                         .HasColumnType("int");
 
-                    b.Property<int>("SocketProcessadorId")
+                    b.Property<int>("SocketProcessador")
                         .HasColumnType("int");
 
                     b.Property<int>("TamanhoPlacaMaeId")
@@ -413,19 +425,7 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("TipoMemoriaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("VersaoPcie")
-                        .HasMaxLength(10)
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ChipsetId");
-
-                    b.HasIndex("SocketProcessadorId");
-
-                    b.HasIndex("TamanhoPlacaMaeId");
-
-                    b.HasIndex("TipoMemoriaId");
 
                     b.ToTable("PlacasMae");
                 });
@@ -487,23 +487,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.ToTable("Rams");
                 });
 
-            modelBuilder.Entity("SimuladorPC.Domain.Entities.Hardware.SocketProcessador", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SocketProcessadores");
-                });
-
             modelBuilder.Entity("SimuladorPC.Domain.Entities.Hardware.Ssd", b =>
                 {
                     b.Property<int>("Id")
@@ -550,23 +533,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.ToTable("Ssds");
                 });
 
-            modelBuilder.Entity("SimuladorPC.Domain.Entities.Hardware.TamanhoPlacaMae", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Tamanho")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TamanhoPlacaMae");
-                });
-
             modelBuilder.Entity("SimuladorPC.Domain.Entities.Hardware.TipoMemoria", b =>
                 {
                     b.Property<int>("Id")
@@ -607,9 +573,16 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("QuantidadeFans")
                         .HasColumnType("int");
 
-                    b.Property<string>("TamanhoRadiador")
+                    b.Property<string>("SocketsSuportados")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("SocketsSuportados");
+
+                    b.Property<int>("TamanhoRadiador_mm")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TdpMaximo")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -643,6 +616,9 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("NivelDesempenho")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PontuacaoCpuMark")
                         .HasColumnType("int");
 
                     b.Property<int>("PontuacaoPassMarkG3D")
@@ -692,17 +668,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.ToTable("Softwares");
                 });
 
-            modelBuilder.Entity("SimuladorPC.Domain.Entities.Hardware.Cpu", b =>
-                {
-                    b.HasOne("SimuladorPC.Domain.Entities.Hardware.SocketProcessador", "Socket")
-                        .WithMany()
-                        .HasForeignKey("SocketProcessadorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Socket");
-                });
-
             modelBuilder.Entity("SimuladorPC.Domain.Entities.Hardware.PciExpressSlot", b =>
                 {
                     b.HasOne("SimuladorPC.Domain.Entities.Hardware.PlacaMae", null)
@@ -710,41 +675,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .HasForeignKey("PlacaMaeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("SimuladorPC.Domain.Entities.Hardware.PlacaMae", b =>
-                {
-                    b.HasOne("SimuladorPC.Domain.Entities.Hardware.Chipset", "Chipset")
-                        .WithMany()
-                        .HasForeignKey("ChipsetId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("SimuladorPC.Domain.Entities.Hardware.SocketProcessador", "SocketProcessador")
-                        .WithMany()
-                        .HasForeignKey("SocketProcessadorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("SimuladorPC.Domain.Entities.Hardware.TamanhoPlacaMae", "TamanhoPlacaMae")
-                        .WithMany()
-                        .HasForeignKey("TamanhoPlacaMaeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("SimuladorPC.Domain.Entities.Hardware.TipoMemoria", "TipoMemoria")
-                        .WithMany()
-                        .HasForeignKey("TipoMemoriaId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Chipset");
-
-                    b.Navigation("SocketProcessador");
-
-                    b.Navigation("TamanhoPlacaMae");
-
-                    b.Navigation("TipoMemoria");
                 });
 
             modelBuilder.Entity("SimuladorPC.Domain.Entities.Hardware.Ram", b =>

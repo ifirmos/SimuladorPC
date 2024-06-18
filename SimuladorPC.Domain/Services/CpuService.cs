@@ -1,39 +1,24 @@
 ﻿using SimuladorPC.Domain.Entities.Hardware;
 using SimuladorPC.Domain.Interfaces.Repositories;
 using SimuladorPC.Domain.Interfaces.Services;
-using System.Net.Sockets;
 
-namespace SimuladorPC.Domain.Services;
-
-public class CpuService : ComponenteService<Cpu>, ICpuService
+namespace SimuladorPC.Domain.Services
 {
-    private readonly ICpuRepository _cpuRepository;
-    private readonly ISocketProcessadorRepository _socketRepository;
-
-    public CpuService(ICpuRepository cpuRepository, ISocketProcessadorRepository socketRepository) : base(cpuRepository)
+    public class CpuService : ComponenteService<Cpu>, ICpuService
     {
-        _cpuRepository = cpuRepository;
-        _socketRepository = socketRepository;
-    }
+        private readonly ICpuRepository _cpuRepository;
 
-    public override Cpu Add(Cpu cpu)
-    {
-        var existingSocket = _socketRepository.Find(s => s.Nome.Trim().ToLower() == cpu.Socket.Nome.Trim().ToLower());
-        if (existingSocket != null)
+        public CpuService(ICpuRepository cpuRepository) : base(cpuRepository)
         {
-            cpu.SetSocket(existingSocket);
+            _cpuRepository = cpuRepository;
         }
 
-        _cpuRepository.Add(cpu);
-        return cpu;
-    }
-    public IEnumerable<Cpu> ObterCpusCompativeis(SetupPc setupPc)
-    {
-        var cpus = _cpuRepository.GetAll();
+        public IEnumerable<Cpu> ObterCpusCompativeis(SetupPc setupPc)
+        {
+            var cpus = _cpuRepository.GetAll();
 
-        return cpus.Where(cpu =>
-            setupPc.PlacaMae == null || setupPc.PlacaMae.SocketProcessador.Equals(cpu.Socket));
+            return cpus.Where(cpu =>
+                setupPc.PlacaMae == null || setupPc.PlacaMae.SocketProcessador == cpu.SocketProcessador);
+        }
     }
 }
-
-

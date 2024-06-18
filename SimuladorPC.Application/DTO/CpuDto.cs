@@ -1,4 +1,5 @@
 using SimuladorPC.Domain.Entities;
+using SimuladorPC.Domain.Enums;
 
 namespace SimuladorPC.Application.DTO;
 
@@ -18,13 +19,13 @@ public class CpuDto : ComponenteDto
     public string SuporteMemoria { get;set; }
     public int NumeroCanaisMemoria { get;set; }
     public string Plataforma { get;set; }
-    public string PcieVersao { get;set; }
+    public VersaoPcie VersaoPcie { get;  set; }
     public int PcieLanes { get;set; }
     public int Nucleos { get;set; }
     public int Threads { get;set; }
     public int FrequenciaBaseMhz { get;set; }
     public int FrequenciaMaximaMhz { get;set; }
     public int PontuacaoCpuMark { get; set; }
-    public SocketProcessadorDto Socket { get;set; }
+    public SocketProcessador SocketProcessador { get;set; }
     public int Tdp { get;set; }
 }

@@ -12,24 +12,20 @@ public class AutoMappingConfig : Profile
         CreateMap<SetupPc, SetupPcDto>().IncludeAllDerived();
         CreateMap<Gabinete, GabineteDto>().ReverseMap();
         CreateMap<Chipset, ChipsetDto>().ReverseMap();
-        CreateMap<SocketProcessador, SocketProcessadorDto>().ReverseMap();
         CreateMap<TipoMemoria, TipoMemoriaDto>().ReverseMap();
         CreateMap<Ram, RamDto>().ReverseMap();
         CreateMap<Fonte, FonteDto>().ReverseMap();
-        CreateMap<Cpu, CpuDto>().ReverseMap()
-            .ForMember(dest => dest.Socket, opt => opt.MapFrom(src => src.Socket));
+        CreateMap<Cpu, CpuDto>().ReverseMap();
         CreateMap<Chipset, ChipsetDto>().ReverseMap();
-        CreateMap<TamanhoPlacaMae, TamanhoPlacaMaeDto>().ReverseMap();
-
+        CreateMap<TamanhoPlacaMae, TamanhoPlacaMaeDto>().ReverseMap(); 
         CreateMap<Ssd, SsdDto>().ReverseMap();
         CreateMap<PciExpressSlot, PciExpressSlotDto>().ReverseMap();
+        CreateMap<WaterCooler, WaterCoolerDto>()
+            .ForMember(dest => dest.SocketsSuportados, opt => opt.MapFrom(src => src.SocketsSuportados.Select(s => s.ToString()).ToList()))
+            .ReverseMap();
 
 
-        CreateMap<PlacaMae, PlacaMaeDto>()
-             .ForMember(dest => dest.SocketProcessador, opt => opt.MapFrom(src => src.SocketProcessador))
-             .ForMember(dest => dest.Chipset, opt => opt.MapFrom(src => src.Chipset))
-             .ForMember(dest => dest.TipoMemoria, opt => opt.MapFrom(src => src.TipoMemoria))
-             .ForMember(dest => dest.TamanhoPlacaMae, opt => opt.MapFrom(src => src.TamanhoPlacaMae))
+        CreateMap<PlacaMae, PlacaMaeDto>()            
              .ForMember(dest => dest.PciExpressSlots, opt => opt.MapFrom(src => src.PciExpressSlots))
              .ReverseMap();
 

@@ -16,7 +16,6 @@ public class SimuladorPcContext : DbContext
     public DbSet<Ram> Rams { get; set; }
     public DbSet<Hd> Hds { get; set; }
     public DbSet<Iluminacao> TiposIluminacao { get; set; }
-    public DbSet<SocketProcessador> SocketProcessadores { get; set; }
     public DbSet<Ssd> Ssds { get; set; }
     public DbSet<TipoMemoria> TiposMemoria { get; set; }
     public DbSet<WaterCooler> WaterCoolers { get; set; }
@@ -39,5 +38,7 @@ public class SimuladorPcContext : DbContext
         modelBuilder.ApplyConfiguration(new RequisitosHardwareConfiguration());
         modelBuilder.ApplyConfiguration(new PlacaMaeConfiguration());
         modelBuilder.ApplyConfiguration(new ChipsetConfiguration());
+        modelBuilder.ApplyConfiguration(new WaterCoolerConfiguration());
+
     }
 }

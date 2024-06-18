@@ -6,17 +6,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PcBuilderService {
-  private apiUrl = 'https://localhost:44350/api/';
+  private apiUrl = 'https://localhost:7218/api/';
 
   constructor(private http: HttpClient) { }
 
   // Buscar todas as Gpus
   listarGpus(): Observable<any> {
     return this.http.get(`${this.apiUrl}//Gpu`);
-  }
-
-  // Buscar componentes compatíveis com o ID selecionado
-  getCompatibleComponents(componentId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/components/compatible/${componentId}`);
   }
 }

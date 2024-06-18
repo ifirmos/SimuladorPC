@@ -4,39 +4,31 @@ using SimuladorPC.Domain.Enums;
 namespace SimuladorPC.Domain.Entities.Hardware;
 public class PlacaMae : Componente
 {
-    public virtual SocketProcessador SocketProcessador { get; private set; }
-    public int SocketProcessadorId { get; private set; }
-    public virtual Chipset Chipset { get; private set; }
+    public SocketProcessador SocketProcessador { get; private set; }
     public int ChipsetId { get; private set; }
-    public virtual TamanhoPlacaMae TamanhoPlacaMae { get; private set; }
     public int TamanhoPlacaMaeId { get; private set; }
-    public virtual TipoMemoria TipoMemoria { get; private set; }
     public int TipoMemoriaId { get; private set; }
     public int SlotsMemoria { get; private set; }
     public int MaxMemoriaSuportadaGb { get; private set; }
     public virtual ICollection<PciExpressSlot> PciExpressSlots { get; private set; }
 
-    public void SetChipset(Chipset chipset)
+    public void SetChipset(int  chipsetId)
     {
-        Chipset = chipset;
-        ChipsetId = chipset.Id;
+        ChipsetId = chipsetId;
     }
-    public void SetSocket(SocketProcessador socket)
+    public void SetSocket(SocketProcessador socketProcessador)
     {
-        SocketProcessador = socket;
-        SocketProcessadorId = socket.Id;
+        SocketProcessador = socketProcessador;
     }
 
-    public void SetTamanhoPlacaMae(TamanhoPlacaMae tamanhoPlacaMae)
+    public void SetTamanhoPlacaMae(int tamanhoPlacaMaeId)
     {
-        TamanhoPlacaMae = tamanhoPlacaMae;
-        TamanhoPlacaMaeId = tamanhoPlacaMae.Id;
+        TamanhoPlacaMaeId = tamanhoPlacaMaeId;
     }
 
-    public void SetTipoMemoria(TipoMemoria tipoMemoria)
+    public void SetTipoMemoria(int tipoMemoriaId)
     {
-        TipoMemoria = tipoMemoria;
-        TipoMemoriaId = tipoMemoria.Id;
+        TipoMemoriaId = tipoMemoriaId;
     }
     public void AdicionarPciExpressSlot(PciExpressSlot pciExpressSlot)
     {

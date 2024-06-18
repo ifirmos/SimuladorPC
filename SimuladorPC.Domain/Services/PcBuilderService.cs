@@ -30,11 +30,11 @@ public class PcBuilderService : IPcBuilderService
 
             setupPc.Ssds.Add(ObterSsdsCompativeis(software, setupPc));
 
+            setupPc.WaterCooler = ObterWaterCoolerCompativel(software, setupPc);
+
             setupPc.Gabinete = ObterGabineteAdequado(software, setupPc);
 
-            //setupPc.WaterCooler = ObterWaterCoolerCompativel(software, setupPc);
-
-            //setupPc.Fonte = ObterFonteAdequada(software, setupPc);
+            setupPc.Fonte = ObterFonteAdequada(setupPc);
         }
         catch (Exception ex)
         {
@@ -78,21 +78,21 @@ public class PcBuilderService : IPcBuilderService
 
     private Gabinete ObterGabineteAdequado(Software software, SetupPc setupPc)
     {
-        var gabinete = _softwareRepository.ObterGabineteAdequado(software, setupPc);
+        var gabinete = _softwareRepository.ObterGabineteAdequado(setupPc);
         if (gabinete == null) throw new InvalidOperationException("Nenhum Gabinete adequado encontrado.");
         return gabinete;
     }
 
     private WaterCooler ObterWaterCoolerCompativel(Software software, SetupPc setupPc)
     {
-        var waterCooler = _softwareRepository.ObterWaterCoolerCompativel(software, setupPc);
+        var waterCooler = _softwareRepository.ObterWaterCoolerCompativel(setupPc);
         if (waterCooler == null) throw new InvalidOperationException("Nenhum WaterCooler compatível encontrado.");
         return waterCooler;
     }
 
-    private Fonte ObterFonteAdequada(Software software, SetupPc setupPc)
+    private Fonte ObterFonteAdequada(SetupPc setupPc)
     {
-        var fonte = _softwareRepository.ObterFonteAdequada(software, setupPc);
+        var fonte = _softwareRepository.ObterFonteAdequada(setupPc);
         if (fonte == null) throw new InvalidOperationException("Nenhuma Fonte adequada encontrada.");
         return fonte;
     }
