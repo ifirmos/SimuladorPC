@@ -18,9 +18,9 @@ public class ComponenteService<T> : IComponenteService<T> where T : Componente
         return _repository.GetAll();
     }
 
-    public virtual T GetById(int id)
+    public virtual T ObterPorId(int id)
     {
-        return _repository.GetById(id);
+        return _repository.ObterPorId(id);
     }
 
     public virtual T Add(T entity)

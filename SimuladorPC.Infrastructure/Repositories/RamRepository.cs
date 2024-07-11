@@ -16,7 +16,7 @@ public class RamRepository : BaseRepository<Ram>, IRamRepository
         return _entities.Include(r => r.TipoMemoria).ToList();
     }
 
-    public override Ram GetById(int id)
+    public override Ram ObterPorId(int id)
     {
         return _entities.Include(r => r.TipoMemoria)
                         .SingleOrDefault(r => r.Id == id);

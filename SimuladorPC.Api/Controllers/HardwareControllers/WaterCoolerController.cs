@@ -28,9 +28,9 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<WaterCoolerDto> GetById(int id)
+        public ActionResult<WaterCoolerDto> ObterPorId(int id)
         {
-            var WaterCooler = _WaterCoolerService.GetById(id);
+            var WaterCooler = _WaterCoolerService.ObterPorId(id);
             if (WaterCooler == null)
             {
                 return NotFound();
@@ -82,7 +82,7 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
                 return BadRequest($"Erro ao mapear para DTO: {ex.Message}");
             }
 
-            return CreatedAtAction(nameof(GetById), new { id = WaterCoolerCriado.Id }, WaterCoolerRetornoDto);
+            return CreatedAtAction(nameof(ObterPorId), new { id = WaterCoolerCriado.Id }, WaterCoolerRetornoDto);
         }
 
     }

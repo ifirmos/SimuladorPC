@@ -28,9 +28,9 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<SoftwareDto> GetById(int id)
+        public ActionResult<SoftwareDto> ObterPorId(int id)
         {
-            var Software = _SoftwareService.GetById(id);
+            var Software = _SoftwareService.ObterPorId(id);
             if (Software == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
             {
                 var softwareCriado = _SoftwareService.AdicionarSoftware(software);
                 var softwareRetornoDto = _mapper.Map<SoftwareDto>(softwareCriado);
-                return CreatedAtAction(nameof(GetById), new { id = softwareCriado.Id }, softwareRetornoDto);
+                return CreatedAtAction(nameof(ObterPorId), new { id = softwareCriado.Id }, softwareRetornoDto);
             }
             catch (Exception ex)
             {

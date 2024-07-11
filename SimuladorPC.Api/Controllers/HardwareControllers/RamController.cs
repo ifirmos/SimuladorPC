@@ -28,9 +28,9 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<RamDto> GetById(int id)
+        public ActionResult<RamDto> ObterPorId(int id)
         {
-            var Ram = _RamService.GetById(id);
+            var Ram = _RamService.ObterPorId(id);
             if (Ram == null)
             {
                 return NotFound();
@@ -82,7 +82,7 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
                 return BadRequest($"Erro ao mapear para DTO: {ex.Message}");
             }
 
-            return CreatedAtAction(nameof(GetById), new { id = RamCriada.Id }, RamRetornoDto);
+            return CreatedAtAction(nameof(ObterPorId), new { id = RamCriada.Id }, RamRetornoDto);
         }
 
     }

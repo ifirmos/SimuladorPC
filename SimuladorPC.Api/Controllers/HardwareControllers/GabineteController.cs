@@ -29,9 +29,9 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<GabineteDto> GetById(int id)
+        public ActionResult<GabineteDto> ObterPorId(int id)
         {
-            var gabinete = _gabineteService.GetById(id);
+            var gabinete = _gabineteService.ObterPorId(id);
             if (gabinete == null)
             {
                 return NotFound();
@@ -83,7 +83,7 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
                 return BadRequest($"Erro ao mapear o gabinete criado para DTO: {ex.Message}");
             }
 
-            return CreatedAtAction(nameof(GetById), new { id = gabineteCriado.Id }, gabineteRetornoDto);
+            return CreatedAtAction(nameof(ObterPorId), new { id = gabineteCriado.Id }, gabineteRetornoDto);
         }
 
     }

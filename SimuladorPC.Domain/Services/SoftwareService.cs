@@ -17,9 +17,9 @@ public class SoftwareService : ISoftwareService
         return _softwareRepository.GetAll();
     }
 
-    public virtual Software GetById(int id)
+    public virtual Software ObterPorId(int id)
     {
-        return _softwareRepository.GetById(id);
+        return _softwareRepository.ObterPorId(id);
     }
 
     public Software AdicionarSoftware(Software software)

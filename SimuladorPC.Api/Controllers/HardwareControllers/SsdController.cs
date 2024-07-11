@@ -28,9 +28,9 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<SsdDto> GetById(int id)
+        public ActionResult<SsdDto> ObterPorId(int id)
         {
-            var Ssd = _SsdService.GetById(id);
+            var Ssd = _SsdService.ObterPorId(id);
             if (Ssd == null)
             {
                 return NotFound();
@@ -82,7 +82,7 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
                 return BadRequest($"Erro ao mapear para DTO: {ex.Message}");
             }
 
-            return CreatedAtAction(nameof(GetById), new { id = SsdCriado.Id }, SsdRetornoDto);
+            return CreatedAtAction(nameof(ObterPorId), new { id = SsdCriado.Id }, SsdRetornoDto);
         }
 
     }

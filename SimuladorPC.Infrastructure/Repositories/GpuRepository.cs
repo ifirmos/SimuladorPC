@@ -4,10 +4,32 @@ using SimuladorPC.Infrastructure.Data;
 
 namespace SimuladorPC.Infrastructure.Repositories;
 
-public class GpuRepository : BaseRepository<Gpu>, IGpuRepository
+public class GpuRepository(SimuladorPcContext context) : BaseRepository<Gpu>(context), IGpuRepository
 {
-    public GpuRepository(SimuladorPcContext context) : base(context)
+    IEnumerable<Gpu> IGpuRepository.ObterGpusPorMarca(string marca)
     {
+        throw new NotImplementedException();
+    }
+
+    IEnumerable<Gpu> IGpuRepository.ObterGpusPorModelo(string modelo)
+    {
+        throw new NotImplementedException();
+    }
+
+    IEnumerable<PlacaMae> IGpuRepository.ListarPlacasMaeCompativeis(int idGpu)
+    {
+        var gpu = _entities.FirstOrDefault(gpu => gpu.Id == idGpu);
+
+        if (gpu == null)
+        {
+            return [];
+        }
+
+        var placasMaeCompativeis = context.PlacasMae
+            .Where(placaMae => placaMae.VersaoPcie >= gpu.VersaoPcie)
+            .ToList(); ;
+
+        return placasMaeCompativeis;
     }
 }
 

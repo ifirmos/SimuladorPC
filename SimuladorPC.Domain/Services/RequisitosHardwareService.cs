@@ -17,9 +17,9 @@ public class RequisitosHardwareService : IRequisitosHardwareService
         return _repository.GetAll();
     }
 
-    public virtual RequisitosHardware GetById(int id)
+    public virtual RequisitosHardware ObterPorId(int id)
     {
-        return _repository.GetById(id);
+        return _repository.ObterPorId(id);
     }
 
     public virtual RequisitosHardware Add(RequisitosHardware entity)

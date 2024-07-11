@@ -27,16 +27,24 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
             return Ok(listaGpuDto);
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<GpuDto> GetById(int id)
+        [HttpGet("id")]
+        public ActionResult<GpuDto> ObterPorId(int id)
         {
-            var gpu = _gpuService.GetById(id);
+            var gpu = _gpuService.ObterPorId(id);
             if (gpu == null)
             {
                 return NotFound();
             }
             var gpuDto = _mapper.Map<GpuDto>(gpu);
             return Ok(gpuDto);
+        }
+
+        [HttpGet("placasMaeCompativeis")]
+        public ActionResult<IEnumerable<PlacaMaeDto>> ListarPlacasMaeCompativeis(int gpuId)
+        {
+            var listaPlacaMae = _gpuService.ListarPlacasMaeCompativeis(gpuId);
+            var listaPlacaMaeDto = _mapper.Map<IEnumerable<PlacaMaeDto>>(listaPlacaMae);
+            return Ok(listaPlacaMaeDto);
         }
 
         [HttpPost]
@@ -82,7 +90,7 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
                 return BadRequest($"Erro ao mapear o gpu criado para DTO: {ex.Message}");
             }
 
-            return CreatedAtAction(nameof(GetById), new { id = gpuCriado.Id }, gpuRetornoDto);
+            return CreatedAtAction(nameof(ObterPorId), new { id = gpuCriado.Id }, gpuRetornoDto);
         }
 
     }

@@ -31,19 +31,19 @@ public class PlacaMaeService : ComponenteService<PlacaMae>, IPlacaMaeService
             throw new Exception("Uma placa mãe com o mesmo nome já existe.");
         }
 
-        var chipsetExiste = _chipsetRepository.GetById(placaMae.ChipsetId);
+        var chipsetExiste = _chipsetRepository.ObterPorId(placaMae.ChipsetId);
         if (chipsetExiste != null)
         {
             placaMae.SetChipset(chipsetExiste.Id);
         }
 
-        var existingTamanhoPlacaMae = _chipsetRepository.GetById(placaMae.TamanhoPlacaMaeId);
+        var existingTamanhoPlacaMae = _chipsetRepository.ObterPorId(placaMae.TamanhoPlacaMaeId);
         if (existingTamanhoPlacaMae != null)
         {
             placaMae.SetTamanhoPlacaMae(existingTamanhoPlacaMae.Id);
         }
 
-        var existingTipoMemoria = _chipsetRepository.GetById(placaMae.TipoMemoriaId);
+        var existingTipoMemoria = _chipsetRepository.ObterPorId(placaMae.TipoMemoriaId);
         if (existingTipoMemoria != null)
         {
             placaMae.SetTipoMemoria(existingTipoMemoria.Id);

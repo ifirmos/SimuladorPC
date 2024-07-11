@@ -28,9 +28,9 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<CpuDto> GetById(int id)
+        public ActionResult<CpuDto> ObterPorId(int id)
         {
-            var cpu = _cpuService.GetById(id);
+            var cpu = _cpuService.ObterPorId(id);
             if (cpu == null)
             {
                 return NotFound();

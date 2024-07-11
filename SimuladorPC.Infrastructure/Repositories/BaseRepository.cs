@@ -16,7 +16,7 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class
     }
 
     public virtual IEnumerable<T> GetAll() => _entities.ToList();
-    public virtual T GetById(int id) => _entities.Find(id);
+    public virtual T ObterPorId(int id) => _entities.Find(id);
     public virtual void Add(T entity)
     {
         _entities.Add(entity);

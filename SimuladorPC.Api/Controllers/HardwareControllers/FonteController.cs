@@ -28,9 +28,9 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<FonteDto> GetById(int id)
+        public ActionResult<FonteDto> ObterPorId(int id)
         {
-            var fonte = _fonteService.GetById(id);
+            var fonte = _fonteService.ObterPorId(id);
             if (fonte == null)
             {
                 return NotFound();
@@ -82,7 +82,7 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
                 return BadRequest($"Erro ao mapear a fonte criada para DTO: {ex.Message}");
             }
 
-            return CreatedAtAction(nameof(GetById), new { id = fonteCriado.Id }, fonteRetornoDto);
+            return CreatedAtAction(nameof(ObterPorId), new { id = fonteCriado.Id }, fonteRetornoDto);
         }
 
     }

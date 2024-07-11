@@ -37,9 +37,9 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
         //}
 
         [HttpGet("{id}")]
-        public ActionResult<PlacaMaeDto> GetById(int id)
+        public ActionResult<PlacaMaeDto> ObterPorId(int id)
         {
-            var placaMae = _placaMaeService.GetById(id);
+            var placaMae = _placaMaeService.ObterPorId(id);
             if (placaMae == null)
             {
                 return NotFound();

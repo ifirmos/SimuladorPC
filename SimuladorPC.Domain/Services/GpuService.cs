@@ -13,4 +13,16 @@ public class GpuService : ComponenteService<Gpu>, IGpuService
     {
         _gpuRepository = gpuRepository;
     }
+    public IEnumerable<Gpu> ObterGpusPorMarca(string marca)
+    {
+        return _gpuRepository.ObterGpusPorMarca(marca);
+    }
+    public IEnumerable<Gpu> ObterGpusPorModelo(string modelo)
+    {
+        return _gpuRepository.ObterGpusPorModelo(modelo);
+    }
+    public IEnumerable<PlacaMae> ListarPlacasMaeCompativeis(int idGpu)
+    {
+        return _gpuRepository.ListarPlacasMaeCompativeis(idGpu);
+    }
 }

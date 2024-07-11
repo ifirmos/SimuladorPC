@@ -11,6 +11,7 @@ public class PlacaMae : Componente
     public int SlotsMemoria { get; private set; }
     public int MaxMemoriaSuportadaGb { get; private set; }
     public virtual ICollection<PciExpressSlot> PciExpressSlots { get; private set; }
+    public VersaoPcie VersaoPcie { get; private set; }
 
     public void SetChipset(int  chipsetId)
     {

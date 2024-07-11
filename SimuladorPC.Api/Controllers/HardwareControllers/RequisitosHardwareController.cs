@@ -30,9 +30,9 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<RequisitosHardwareDto> GetById(int id)
+        public ActionResult<RequisitosHardwareDto> ObterPorId(int id)
         {
-            var requisitosHardware = _requisitosHardwareService.GetById(id);
+            var requisitosHardware = _requisitosHardwareService.ObterPorId(id);
             if (requisitosHardware == null)
             {
                 return NotFound();
@@ -49,7 +49,7 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
                 return BadRequest(ModelState);
             }
 
-            var software = _softwareService.GetById(requisitosHardwareDto.SoftwareId);
+            var software = _softwareService.ObterPorId(requisitosHardwareDto.SoftwareId);
             if (software == null)
             {
                 return NotFound("Software não encontrado.");
@@ -59,7 +59,7 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
             var requisitosHardwareCriado = _requisitosHardwareService.Add(requisitosHardware);
             var requisitosHardwareRetornoDto = _mapper.Map<RequisitosHardwareDto>(requisitosHardwareCriado);
 
-            return CreatedAtAction(nameof(GetById), new { id = requisitosHardwareCriado.Id }, requisitosHardwareRetornoDto);
+            return CreatedAtAction(nameof(ObterPorId), new { id = requisitosHardwareCriado.Id }, requisitosHardwareRetornoDto);
         }
     }
 }
