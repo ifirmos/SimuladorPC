@@ -12,12 +12,10 @@ public class AutoMappingConfig : Profile
         CreateMap<SetupPc, SetupPcDto>().IncludeAllDerived();
         CreateMap<Gabinete, GabineteDto>().ReverseMap();
         CreateMap<Chipset, ChipsetDto>().ReverseMap();
-        CreateMap<TipoMemoria, TipoMemoriaDto>().ReverseMap();
         CreateMap<Ram, RamDto>().ReverseMap();
         CreateMap<Fonte, FonteDto>().ReverseMap();
         CreateMap<Cpu, CpuDto>().ReverseMap();
         CreateMap<Chipset, ChipsetDto>().ReverseMap();
-        CreateMap<TamanhoPlacaMae, TamanhoPlacaMaeDto>().ReverseMap(); 
         CreateMap<Ssd, SsdDto>().ReverseMap();
         CreateMap<PciExpressSlot, PciExpressSlotDto>().ReverseMap();
         CreateMap<WaterCooler, WaterCoolerDto>()

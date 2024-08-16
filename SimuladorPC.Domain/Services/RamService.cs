@@ -20,7 +20,7 @@ public class RamService : ComponenteService<Ram>, IRamService
             throw new Exception("Uma memória com o mesmo nome já existe.");
         }
 
-        var existingTipoRam = _ramRepository.Find(r => r.TipoMemoria.Tipo == ram.TipoMemoria.Tipo);
+        var existingTipoRam = _ramRepository.Find(r => r.TipoMemoria == ram.TipoMemoria);
         if (existingTipoRam != null)
         {
             ram.SetTipoRam(existingTipoRam.TipoMemoria);

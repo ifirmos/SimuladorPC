@@ -32,6 +32,7 @@ builder.Services.AddScoped<ICpuRepository, CpuRepository>();
 builder.Services.AddScoped<IGpuRepository, GpuRepository>();
 builder.Services.AddScoped<IGabineteRepository, GabineteRepository>();
 builder.Services.AddScoped<IRequisitosHardwareService, RequisitosHardwareService>();
+builder.Services.AddScoped<IRequisitosHardwareRepository, RequisitosHardwareRepository>();
 builder.Services.AddScoped<IRamRepository, RamRepository>();
 builder.Services.AddScoped<IPlacaMaeRepository, PlacaMaeRepository>();
 builder.Services.AddScoped<ISoftwareRepository, SoftwareRepository>();

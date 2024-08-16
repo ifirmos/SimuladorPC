@@ -7,10 +7,8 @@ public class PlacaMaeDto : ComponenteDto
     public virtual SocketProcessador SocketProcessador { get; set; }
     public virtual ChipsetDto Chipset { get; set; }
     public int ChipsetId { get; private set; }
-    public virtual TamanhoPlacaMaeDto TamanhoPlacaMae { get; set; }
-    public int TamanhoPlacaMaeId { get; private set; }
-    public virtual TipoMemoriaDto TipoMemoria { get; set; }
-    public int TipoMemoriaId { get; private set; }
+    public  TamanhoPlacaMae TamanhoPlacaMae { get; set; }
+    public  virtual TipoMemoria TipoMemoria { get; set; }
     public int SlotsMemoria { get; set; }
     public int MaxMemoriaSuportadaGb { get; set; }
     public virtual ICollection<PciExpressSlotDto> PciExpressSlots { get; set; }

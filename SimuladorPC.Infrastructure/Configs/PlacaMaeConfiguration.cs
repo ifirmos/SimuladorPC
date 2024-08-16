@@ -11,11 +11,6 @@ namespace SimuladorPC.Data.Configurations
             builder.HasKey(p => p.Id);
             builder.Property(p => p.SocketProcessador).IsRequired();
             builder.Property(p => p.ChipsetId).IsRequired();
-            builder.Property(p => p.TamanhoPlacaMaeId).IsRequired();
-            builder.Property(p => p.TipoMemoriaId).IsRequired();builder.HasMany(p => p.PciExpressSlots)
-                   .WithOne()
-                   .HasForeignKey(s => s.PlacaMaeId)
-                   .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

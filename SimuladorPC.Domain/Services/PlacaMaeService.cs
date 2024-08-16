@@ -1,4 +1,5 @@
 ﻿using SimuladorPC.Domain.Entities.Hardware;
+using SimuladorPC.Domain.Enums;
 using SimuladorPC.Domain.Interfaces.Repositories;
 using SimuladorPC.Domain.Interfaces.Services;
 
@@ -31,22 +32,14 @@ public class PlacaMaeService : ComponenteService<PlacaMae>, IPlacaMaeService
             throw new Exception("Uma placa mãe com o mesmo nome já existe.");
         }
 
-        var chipsetExiste = _chipsetRepository.ObterPorId(placaMae.ChipsetId);
-        if (chipsetExiste != null)
+        if (!Enum.IsDefined(typeof(TamanhoPlacaMae), placaMae.TamanhoPlacaMae))
         {
-            placaMae.SetChipset(chipsetExiste.Id);
+            throw new ArgumentException("Tamanho de placa mãe inválido.");
         }
 
-        var existingTamanhoPlacaMae = _chipsetRepository.ObterPorId(placaMae.TamanhoPlacaMaeId);
-        if (existingTamanhoPlacaMae != null)
+        if (!Enum.IsDefined(typeof(TipoMemoria), placaMae.TipoMemoria))
         {
-            placaMae.SetTamanhoPlacaMae(existingTamanhoPlacaMae.Id);
-        }
-
-        var existingTipoMemoria = _chipsetRepository.ObterPorId(placaMae.TipoMemoriaId);
-        if (existingTipoMemoria != null)
-        {
-            placaMae.SetTipoMemoria(existingTipoMemoria.Id);
+            throw new ArgumentException("Tipo de memória inválido.");
         }
 
         _placaMaeRepository.Add(placaMae);

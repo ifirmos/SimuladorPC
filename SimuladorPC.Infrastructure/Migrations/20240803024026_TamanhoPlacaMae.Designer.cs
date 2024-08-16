@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SimuladorPC.Infrastructure.Data;
 
@@ -10,9 +11,11 @@ using SimuladorPC.Infrastructure.Data;
 namespace SimuladorPC.Infrastructure.Migrations
 {
     [DbContext(typeof(SimuladorPcContext))]
-    partial class SimuladorPcContextModelSnapshot : ModelSnapshot
+    [Migration("20240803024026_TamanhoPlacaMae")]
+    partial class TamanhoPlacaMae
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,9 +119,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("PontuacaoCpuMark")
                         .HasColumnType("int");
 
-                    b.Property<int>("Preco")
-                        .HasColumnType("int");
-
                     b.Property<int>("SocketProcessador")
                         .HasColumnType("int");
 
@@ -178,9 +178,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("Potencia")
                         .HasColumnType("int");
 
-                    b.Property<int>("Preco")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Fontes");
@@ -231,9 +228,6 @@ namespace SimuladorPC.Infrastructure.Migrations
 
                     b.Property<float>("Peso_Kg")
                         .HasColumnType("real");
-
-                    b.Property<int>("Preco")
-                        .HasColumnType("int");
 
                     b.Property<int>("SuporteRadiador_mm")
                         .HasColumnType("int");
@@ -293,9 +287,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("PotenciaRecomendadaEmWatts")
                         .HasColumnType("int");
 
-                    b.Property<int>("Preco")
-                        .HasColumnType("int");
-
                     b.Property<int>("QtdCoolers")
                         .HasColumnType("int");
 
@@ -336,9 +327,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Preco")
-                        .HasColumnType("int");
 
                     b.Property<string>("Velocidade")
                         .IsRequired()
@@ -425,9 +413,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Preco")
-                        .HasColumnType("int");
-
                     b.Property<int>("SlotsMemoria")
                         .HasColumnType("int");
 
@@ -437,7 +422,10 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("TamanhoPlacaMae")
                         .HasColumnType("int");
 
-                    b.Property<int>("TipoMemoria")
+                    b.Property<int>("TamanhoPlacaMaeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TipoMemoriaId")
                         .HasColumnType("int");
 
                     b.Property<int>("VersaoPcie")
@@ -446,6 +434,8 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ChipsetId");
+
+                    b.HasIndex("TipoMemoriaId");
 
                     b.ToTable("PlacasMae");
                 });
@@ -488,13 +478,10 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Preco")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Rgb")
                         .HasColumnType("bit");
 
-                    b.Property<int>("TipoMemoria")
+                    b.Property<int>("TipoMemoriaId")
                         .HasColumnType("int");
 
                     b.Property<double>("Voltagem")
@@ -504,6 +491,8 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TipoMemoriaId");
 
                     b.ToTable("Rams");
                 });
@@ -539,9 +528,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Preco")
-                        .HasColumnType("int");
-
                     b.Property<string>("Tipo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -555,6 +541,23 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Ssds");
+                });
+
+            modelBuilder.Entity("SimuladorPC.Domain.Entities.Hardware.TipoMemoria", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TiposMemoria");
                 });
 
             modelBuilder.Entity("SimuladorPC.Domain.Entities.Hardware.WaterCooler", b =>
@@ -576,9 +579,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Preco")
-                        .HasColumnType("int");
 
                     b.Property<int>("QuantidadeFans")
                         .HasColumnType("int");
@@ -695,7 +695,26 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("SimuladorPC.Domain.Entities.Hardware.TipoMemoria", "TipoMemoria")
+                        .WithMany()
+                        .HasForeignKey("TipoMemoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Chipset");
+
+                    b.Navigation("TipoMemoria");
+                });
+
+            modelBuilder.Entity("SimuladorPC.Domain.Entities.Hardware.Ram", b =>
+                {
+                    b.HasOne("SimuladorPC.Domain.Entities.Hardware.TipoMemoria", "TipoMemoria")
+                        .WithMany()
+                        .HasForeignKey("TipoMemoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TipoMemoria");
                 });
 
             modelBuilder.Entity("SimuladorPC.Domain.Entities.Software.RequisitosHardware", b =>

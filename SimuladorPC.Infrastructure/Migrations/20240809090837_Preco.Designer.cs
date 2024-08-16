@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SimuladorPC.Infrastructure.Data;
 
@@ -10,9 +11,11 @@ using SimuladorPC.Infrastructure.Data;
 namespace SimuladorPC.Infrastructure.Migrations
 {
     [DbContext(typeof(SimuladorPcContext))]
-    partial class SimuladorPcContextModelSnapshot : ModelSnapshot
+    [Migration("20240809090837_Preco")]
+    partial class Preco
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

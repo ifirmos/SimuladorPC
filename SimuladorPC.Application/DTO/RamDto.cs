@@ -1,4 +1,6 @@
-﻿namespace SimuladorPC.Application.DTO;
+﻿using SimuladorPC.Domain.Enums;
+
+namespace SimuladorPC.Application.DTO;
 
 public class RamDto : ComponenteDto
 {
@@ -6,7 +8,7 @@ public class RamDto : ComponenteDto
     public int ClockBaseMhz { get;  set; }
     public int ClockMaximoOverclockMhz { get;  set; }
     public bool Rgb { get;  set; }
-    public TipoMemoriaDto TipoMemoria { get;  set; } // DDR4, DDR5, etc.
+    public TipoMemoria TipoMemoria { get;  set; } // DDR4, DDR5, etc.
     public int Latencia { get;  set; } // Latência CAS da memória, importante para o desempenho.
     public double Voltagem { get;  set; } // Voltagem operacional da RAM.
     public bool Ecc { get;  set; } // Indica se a memória possui ECC (Error-Correcting Code).

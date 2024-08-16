@@ -6,4 +6,5 @@ namespace SimuladorPC.Domain.Interfaces.Services;
 public interface IPcBuilderService
 {
     SetupPc AutoBuildPcConfiguration(Software software);
+    SetupPc AutoBuildPcConfiguration(RequisitosHardware requisito);
 }

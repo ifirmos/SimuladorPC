@@ -6,4 +6,5 @@ public class Componente
     public string Nome { get; private set; }
     public string Fabricante { get; private set; }
     public string Modelo { get; private set; }
+    public int Preco { get; private set; }
 }

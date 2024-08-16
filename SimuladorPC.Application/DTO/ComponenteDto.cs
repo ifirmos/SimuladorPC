@@ -6,6 +6,7 @@ public class ComponenteDto
     public string Nome { get; set; }
     public string Fabricante { get; set; }
     public string Modelo { get; set; }
+    public int Preco { get; set; }
     protected ComponenteDto(int id = 0, string nome = "", string fabricante = "", string modelo = "")
     {
         Id = id;

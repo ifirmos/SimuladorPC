@@ -17,7 +17,6 @@ public class SimuladorPcContext : DbContext
     public DbSet<Hd> Hds { get; set; }
     public DbSet<Iluminacao> TiposIluminacao { get; set; }
     public DbSet<Ssd> Ssds { get; set; }
-    public DbSet<TipoMemoria> TiposMemoria { get; set; }
     public DbSet<WaterCooler> WaterCoolers { get; set; }
     public DbSet<Software> Softwares { get; set; }
     public DbSet<RequisitosHardware> RequisitosHardware { get; set;}

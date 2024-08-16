@@ -16,12 +16,10 @@ public class SoftwareRepository(SimuladorPcContext context) : BaseRepository<Sof
     {
         var requisitoIntermediario = software.Requisitos
             .FirstOrDefault(r => r.NivelDesempenho == NivelDesempenho.Intermediario);
-
         var cpuCompativel = context.Cpus
-        .Where(cpu => cpu.PontuacaoCpuMark >= requisitoIntermediario.PontuacaoCpuMark)
-        .OrderBy(cpu => cpu.PontuacaoCpuMark)
-        .FirstOrDefault();
-
+            .Where(cpu => cpu.PontuacaoCpuMark >= requisitoIntermediario.PontuacaoCpuMark)
+            .OrderBy(cpu => cpu.PontuacaoCpuMark)
+            .FirstOrDefault();
         return cpuCompativel ?? throw new InvalidOperationException("Nenhuma CPU encontrada para o Software informado.");
     }
 
@@ -62,7 +60,7 @@ public class SoftwareRepository(SimuladorPcContext context) : BaseRepository<Sof
 
 
         var ramCompativel = context.Rams
-        .Where(ram => ram.CapacidadeGb >= requisitoIntermediario.MinimoRamGb && ram.TipoMemoria.Id == setupPc.PlacaMae.TipoMemoriaId)
+        .Where(ram => ram.CapacidadeGb >= requisitoIntermediario.MinimoRamGb && ram.TipoMemoria == setupPc.PlacaMae.TipoMemoria)
         .FirstOrDefault();
 
         return ramCompativel ?? throw new InvalidOperationException("Nenhuma Ram compatível encontrada para o Software informado.");

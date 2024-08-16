@@ -24,7 +24,7 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
         public ActionResult<IEnumerable<PlacaMaeDto>> GetAll()
         {
             var placaMaes = _placaMaeService.GetAll();
-            var placaMaesDto = _mapper.Map<IEnumerable<PlacaMaeDto>>(placaMaes);
+            var placaMaesDto = _mapper.Map<IEnumerable<PlacaMaeDto>>(placaMaes).ToList();
             return Ok(placaMaesDto);
         }
 

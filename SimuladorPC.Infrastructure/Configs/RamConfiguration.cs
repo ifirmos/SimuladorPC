@@ -10,12 +10,6 @@ namespace SimuladorPC.Data.Configurations
         {
             // Definir chave primária
             builder.HasKey(r => r.Id);
-
-            // Configurar relacionamento com TipoMemoria
-            builder.HasOne(r => r.TipoMemoria)
-                   .WithMany()
-                   .HasForeignKey("TipoMemoriaId")
-                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
