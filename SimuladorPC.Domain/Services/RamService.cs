@@ -15,7 +15,7 @@ public class RamService : ComponenteService<Ram>, IRamService
 
     public override Ram Add(Ram ram)
     {
-        if (_ramRepository.Any(r => r.Modelo.Trim().ToLower() == ram.Nome.Trim().ToLower()))
+        if (_ramRepository.Any(r => r.Sku.Trim().ToLower() == ram.Nome.Trim().ToLower()))
         {
             throw new Exception("Uma memória com o mesmo nome já existe.");
         }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SimuladorPC.Infrastructure.Data;
 
@@ -10,9 +11,11 @@ using SimuladorPC.Infrastructure.Data;
 namespace SimuladorPC.Infrastructure.Migrations
 {
     [DbContext(typeof(SimuladorPcContext))]
-    partial class SimuladorPcContextModelSnapshot : ModelSnapshot
+    [Migration("20240823153549_Sku")]
+    partial class Sku
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,10 +99,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Miniatura")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -173,10 +172,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Miniatura")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("Modular")
                         .HasColumnType("bit");
 
@@ -241,10 +236,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("Largura_Cm")
                         .HasColumnType("int");
 
-                    b.Property<string>("Miniatura")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -295,10 +286,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Imagens")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Miniatura")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -362,10 +349,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Imagens")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Miniatura")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -461,10 +444,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("MaxMemoriaSuportadaGb")
                         .HasColumnType("int");
 
-                    b.Property<string>("Miniatura")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -529,10 +508,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("Latencia")
                         .HasColumnType("int");
 
-                    b.Property<string>("Miniatura")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Modulos")
                         .HasColumnType("int");
 
@@ -591,10 +566,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Miniatura")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -634,10 +605,6 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Imagens")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Miniatura")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

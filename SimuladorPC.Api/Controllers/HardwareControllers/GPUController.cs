@@ -7,7 +7,7 @@ using SimuladorPC.Domain.Entities.Hardware;
 namespace SimuladorPC.Api.Controllers.HardwareControllers
 {
     [ApiController]
-    [Route("api/Gpu")]
+    [Route("api/gpu")]
     public class GpuController : ControllerBase
     {
         private readonly IGpuService _gpuService;
@@ -93,5 +93,36 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
             return CreatedAtAction(nameof(ObterPorId), new { id = gpuCriado.Id }, gpuRetornoDto);
         }
 
+        [HttpPut("{id}/adicionar-imagens")]
+        public ActionResult<GpuDto> AdicionarImagens(int id, [FromBody] IList<string> urlsImagens)
+        {
+            if (urlsImagens == null || !urlsImagens.Any())
+            {
+                return BadRequest("A lista de URLs de imagens não pode ser nula ou vazia.");
+            }
+
+            var gpu = _gpuService.ObterPorId(id);
+            if (gpu == null)
+            {
+                return NotFound($"GPU com ID {id} não encontrada.");
+            }
+
+            try
+            {
+                foreach (var url in urlsImagens)
+                {
+                    gpu.AdicionarImagem(url);
+                }
+
+                _gpuService.Update(gpu);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao adicionar as imagens: {ex.Message}");
+            }
+
+            var gpuDto = _mapper.Map<GpuDto>(gpu);
+            return Ok(gpuDto);
+        }
     }
 }

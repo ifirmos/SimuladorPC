@@ -1,17 +1,14 @@
-﻿namespace SimuladorPC.Application.DTO;
-
-public class ComponenteDto
+﻿namespace SimuladorPC.Application.DTO
 {
-    public int Id { get; private set; }
-    public string Nome { get; set; }
-    public string Fabricante { get; set; }
-    public string Modelo { get; set; }
-    public int Preco { get; set; }
-    protected ComponenteDto(int id = 0, string nome = "", string fabricante = "", string modelo = "")
+    public class ComponenteDto
     {
-        Id = id;
-        Nome = nome;    
-        Fabricante = fabricante;
-        Modelo = modelo;
+        public int Id { get; private set; }
+        public string Nome { get; set; }
+        public string Fabricante { get; set; }
+        public string Sku { get; set; }
+        public int Preco { get; set; }
+
+        public IList<string> Imagens { get; set; } = new List<string>();
+        public string Miniatura {get; set; }
     }
 }

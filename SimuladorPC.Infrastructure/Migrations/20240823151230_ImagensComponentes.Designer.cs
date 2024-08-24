@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SimuladorPC.Infrastructure.Data;
 
@@ -10,9 +11,11 @@ using SimuladorPC.Infrastructure.Data;
 namespace SimuladorPC.Infrastructure.Migrations
 {
     [DbContext(typeof(SimuladorPcContext))]
-    partial class SimuladorPcContextModelSnapshot : ModelSnapshot
+    [Migration("20240823151230_ImagensComponentes")]
+    partial class ImagensComponentes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,7 +99,7 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Miniatura")
+                    b.Property<string>("Modelo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -122,10 +125,6 @@ namespace SimuladorPC.Infrastructure.Migrations
 
                     b.Property<int>("Preco")
                         .HasColumnType("int");
-
-                    b.Property<string>("Sku")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SocketProcessador")
                         .HasColumnType("int");
@@ -173,7 +172,7 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Miniatura")
+                    b.Property<string>("Modelo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -192,10 +191,6 @@ namespace SimuladorPC.Infrastructure.Migrations
 
                     b.Property<int>("Preco")
                         .HasColumnType("int");
-
-                    b.Property<string>("Sku")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -241,7 +236,7 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("Largura_Cm")
                         .HasColumnType("int");
 
-                    b.Property<string>("Miniatura")
+                    b.Property<string>("Modelo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -254,10 +249,6 @@ namespace SimuladorPC.Infrastructure.Migrations
 
                     b.Property<int>("Preco")
                         .HasColumnType("int");
-
-                    b.Property<string>("Sku")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SuporteRadiador_mm")
                         .HasColumnType("int");
@@ -298,7 +289,7 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Miniatura")
+                    b.Property<string>("Modelo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -329,10 +320,6 @@ namespace SimuladorPC.Infrastructure.Migrations
 
                     b.Property<int>("QtdMemoriaEmGb")
                         .HasColumnType("int");
-
-                    b.Property<string>("Sku")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TecnologiasSuportadas")
                         .IsRequired()
@@ -365,7 +352,7 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Miniatura")
+                    b.Property<string>("Modelo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -375,10 +362,6 @@ namespace SimuladorPC.Infrastructure.Migrations
 
                     b.Property<int>("Preco")
                         .HasColumnType("int");
-
-                    b.Property<string>("Sku")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Velocidade")
                         .IsRequired()
@@ -461,7 +444,7 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("MaxMemoriaSuportadaGb")
                         .HasColumnType("int");
 
-                    b.Property<string>("Miniatura")
+                    b.Property<string>("Modelo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -471,10 +454,6 @@ namespace SimuladorPC.Infrastructure.Migrations
 
                     b.Property<int>("Preco")
                         .HasColumnType("int");
-
-                    b.Property<string>("Sku")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SlotsMemoria")
                         .HasColumnType("int");
@@ -529,7 +508,7 @@ namespace SimuladorPC.Infrastructure.Migrations
                     b.Property<int>("Latencia")
                         .HasColumnType("int");
 
-                    b.Property<string>("Miniatura")
+                    b.Property<string>("Modelo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -545,10 +524,6 @@ namespace SimuladorPC.Infrastructure.Migrations
 
                     b.Property<bool>("Rgb")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Sku")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TipoMemoria")
                         .HasColumnType("int");
@@ -591,7 +566,7 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Miniatura")
+                    b.Property<string>("Modelo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -601,10 +576,6 @@ namespace SimuladorPC.Infrastructure.Migrations
 
                     b.Property<int>("Preco")
                         .HasColumnType("int");
-
-                    b.Property<string>("Sku")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Tipo")
                         .IsRequired()
@@ -637,7 +608,7 @@ namespace SimuladorPC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Miniatura")
+                    b.Property<string>("Modelo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -650,10 +621,6 @@ namespace SimuladorPC.Infrastructure.Migrations
 
                     b.Property<int>("QuantidadeFans")
                         .HasColumnType("int");
-
-                    b.Property<string>("Sku")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SocketsSuportados")
                         .IsRequired()
