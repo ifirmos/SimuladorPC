@@ -15,13 +15,13 @@ public class Cpu : Componente
     public int ConsumoEnergia { get; private set; }
     public bool GraficosIntegrados { get; private set; }
     public int TemperaturaMaxima { get; private set; }
-    public string SuporteMemoria { get; private set; }
     public int NumeroCanaisMemoria { get; private set; }
     public string Plataforma { get; private set; }
     public VersaoPcie VersaoPcie { get; private set; }
     public int PcieLanes { get; private set; }
     public int Nucleos { get; private set; }
     public int Threads { get; private set; }
+    public TipoMemoria TipoMemoria { get; private set; }
     public int FrequenciaBaseMhz { get; private set; }
     public int FrequenciaMaximaMhz { get; private set; }
     public SocketProcessador SocketProcessador { get; private set; }

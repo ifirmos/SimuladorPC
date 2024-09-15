@@ -8,10 +8,7 @@ namespace SimuladorPC.Infrastructure.Data;
 
 public class SoftwareRepository(SimuladorPcContext context) : BaseRepository<Software>(context), ISoftwareRepository
 {
-    public override IEnumerable<Software> GetAll()
-    {
-        return _entities.Include(s => s.Requisitos);
-    }
+    
     public Cpu ObterCpuCompativel(Software software)
     {
         var requisitoIntermediario = software.Requisitos
@@ -101,6 +98,7 @@ public class SoftwareRepository(SimuladorPcContext context) : BaseRepository<Sof
 
     public Fonte ObterFonteAdequada(SetupPc setupPc)
     {
+        
         var fonteAdequada = context.Fontes
         .Where(fonte => fonte.Potencia >= setupPc.ConsumoMaximoTotalEmWatts)
         .OrderBy(Fonte => Fonte.Potencia)

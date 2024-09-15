@@ -11,11 +11,6 @@ public class PlacaMaeRepository : BaseRepository<PlacaMae>, IPlacaMaeRepository
     public PlacaMaeRepository(SimuladorPcContext context) : base(context)
     {
     }
-
-    public override IEnumerable<PlacaMae> GetAll()
-    {
-        return _entities.ToList();
-    }
     public IEnumerable<Cpu> ListarCpusCompativeis(int placaMaeId)
     {
         var placaMae = _entities            

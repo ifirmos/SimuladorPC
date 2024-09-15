@@ -24,10 +24,11 @@ public class PcBuilderService : IPcBuilderService
             setupPc.Cpu = ObterCpuCompativel(software);
             setupPc.Gpu = ObterGpuCompativel(software, setupPc);
             setupPc.PlacaMae = ObterPlacaMaeCompativel(software, setupPc);
-            setupPc.Rams.Add(ObterRamsCompativeis(software, setupPc));
-            setupPc.Ssds.Add(ObterSsdsCompativeis(software, setupPc));
+            setupPc.Ram = ObterRamsCompativeis(software, setupPc);
+            setupPc.Ssd = ObterSsdsCompativeis(software, setupPc);
             setupPc.WaterCooler = ObterWaterCoolerCompativel(software, setupPc);
             setupPc.Gabinete = ObterGabineteAdequado(software, setupPc);
+            CalcularConsumoTotalWatts(setupPc);
             setupPc.Fonte = ObterFonteAdequada(setupPc);
         }
         catch (Exception ex)
@@ -45,10 +46,11 @@ public class PcBuilderService : IPcBuilderService
             setupPc.Cpu = ObterCpuCompativel(requisito);
             setupPc.Gpu = ObterGpuCompativel(requisito, setupPc);
             setupPc.PlacaMae = ObterPlacaMaeCompativel(requisito, setupPc);
-            setupPc.Rams.Add(ObterRamsCompativeis(requisito, setupPc));
-            setupPc.Ssds.Add(ObterSsdsCompativeis(requisito, setupPc));
+            setupPc.Ram= ObterRamsCompativeis(requisito, setupPc);
+            setupPc.Ssd = ObterSsdsCompativeis(requisito, setupPc);
             setupPc.WaterCooler = ObterWaterCoolerCompativel(requisito, setupPc);
             setupPc.Gabinete = ObterGabineteAdequado(requisito, setupPc);
+            CalcularConsumoTotalWatts(setupPc);
             setupPc.Fonte = ObterFonteAdequada(setupPc);
         }
         catch (Exception ex)
@@ -58,6 +60,20 @@ public class PcBuilderService : IPcBuilderService
         return setupPc;
     }
 
+    private static void CalcularConsumoTotalWatts(SetupPc setupPc)
+    {
+        int consumoTotal = 0;
+
+        consumoTotal += setupPc.Cpu?.ConsumoEmWatts ?? 0;
+        consumoTotal += setupPc.Gpu?.ConsumoEmWatts ?? 0;
+        consumoTotal += setupPc.PlacaMae?.ConsumoEmWatts ?? 0;
+        consumoTotal += setupPc.Ram?.ConsumoEmWatts ?? 0;
+        consumoTotal += setupPc.Ssd?.ConsumoEmWatts ?? 0;
+        consumoTotal += setupPc.WaterCooler?.ConsumoEmWatts ?? 0;
+        consumoTotal += setupPc.Gabinete?.ConsumoEmWatts ?? 0;
+
+        setupPc.ConsumoMaximoTotalEmWatts = consumoTotal;
+    }
     private Cpu ObterCpuCompativel(Software software)
     {
         var cpu = _softwareRepository.ObterCpuCompativel(software);

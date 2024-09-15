@@ -8,7 +8,8 @@ public class AutoMappingConfig : Profile
 {
     public AutoMappingConfig()
     {
-        CreateMap<Componente, ComponenteDto>().IncludeAllDerived();
+        CreateMap<Componente, ComponenteDto>().ReverseMap();
+        CreateMap<Fabricante, FabricanteDto>().ReverseMap();
         CreateMap<SetupPc, SetupPcDto>().IncludeAllDerived();
         CreateMap<Gabinete, GabineteDto>().ReverseMap();
         CreateMap<Chipset, ChipsetDto>().ReverseMap();

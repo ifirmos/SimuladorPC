@@ -9,8 +9,10 @@ public class SoftwareConfiguration : IEntityTypeConfiguration<Software>
     {
         builder.HasKey(s => s.Id);
         builder.Property(s => s.Nome).IsRequired().HasMaxLength(200);
+        builder.Property(s => s.Imagem).IsRequired().HasMaxLength(200);
         builder.Property(s => s.Versao).IsRequired().HasMaxLength(50);
         builder.Property(s => s.Descricao).IsRequired(false).HasMaxLength(500);
+
 
         // Configuração da relação com RequisitosHardware
         builder.HasMany(s => s.Requisitos)

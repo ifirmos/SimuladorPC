@@ -8,7 +8,7 @@ using System;
 namespace SimuladorPC.Api.Controllers.HardwareControllers
 {
     [ApiController]
-    [Route("api/placaMae")]
+    [Route("api/placamae")]
     public class PlacaMaeController : ControllerBase
     {
         private readonly IPlacaMaeService _placaMaeService;

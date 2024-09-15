@@ -15,24 +15,24 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class
         _entities = context.Set<T>();
     }
 
-    public virtual IEnumerable<T> GetAll() => _entities.ToList();
-    public virtual T ObterPorId(int id) => _entities.Find(id);
-    public virtual void Add(T entity)
+    public  IEnumerable<T> GetAll() => _entities.ToList();
+    public  T ObterPorId(int id) => _entities.Find(id);
+    public  void Add(T entity)
     {
         _entities.Add(entity);
         _context.SaveChanges();
     }
-    public virtual void Update(T entity)
+    public  void Update(T entity)
     {
         _entities.Update(entity);
         _context.SaveChanges();
     }
-    public virtual void Delete(T entity)
+    public  void Delete(T entity)
     {
         _entities.Remove(entity);
         _context.SaveChanges();
     }
-    public virtual bool Any(Expression<Func<T, bool>> predicate) => _entities.Any(predicate);
-    public virtual T Find(Expression<Func<T, bool>> predicate) => _entities.FirstOrDefault(predicate);
-    public virtual IQueryable<T> GetAllAsQueryable() => _entities.AsQueryable();
+    public  bool Any(Expression<Func<T, bool>> predicate) => _entities.Any(predicate);
+    public  T Find(Expression<Func<T, bool>> predicate) => _entities.FirstOrDefault(predicate);
+    public  IQueryable<T> GetAllAsQueryable() => _entities.AsQueryable();
 }

@@ -5,25 +5,25 @@
 namespace SimuladorPC.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class PlacaMaePcie : Migration
+    public partial class SoftwareCategoria : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "VersaoPcie",
-                table: "PlacasMae",
-                type: "int",
+            migrationBuilder.AddColumn<string>(
+                name: "Categoria",
+                table: "Softwares",
+                type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: "");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "VersaoPcie",
-                table: "PlacasMae");
+                name: "Categoria",
+                table: "Softwares");
         }
     }
 }

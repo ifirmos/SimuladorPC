@@ -7,8 +7,8 @@ public class ChipsetConfiguration : IEntityTypeConfiguration<Chipset>
 {
     public void Configure(EntityTypeBuilder<Chipset> builder)
     {
-        builder.HasKey(c => c.Id);
-        builder.HasIndex(c => c.Modelo).IsUnique();
+        //builder.HasKey(c => c.Id);
+        ////builder.HasIndex(c => c.Modelo).IsUnique();
     }
 }
 

@@ -36,6 +36,8 @@ public class SimuladorPcContext : DbContext
         modelBuilder.ApplyConfiguration(new SoftwareConfiguration());
         modelBuilder.ApplyConfiguration(new RequisitosHardwareConfiguration());
         modelBuilder.ApplyConfiguration(new PlacaMaeConfiguration());
+        modelBuilder.ApplyConfiguration(new CpuConfiguration());
+
         modelBuilder.ApplyConfiguration(new ChipsetConfiguration());
         modelBuilder.ApplyConfiguration(new WaterCoolerConfiguration());
 

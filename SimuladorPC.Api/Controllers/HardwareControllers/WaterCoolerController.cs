@@ -7,7 +7,7 @@ using SimuladorPC.Domain.Entities.Hardware;
 namespace SimuladorPC.Api.Controllers.HardwareControllers
 {
     [ApiController]
-    [Route("api/WaterCooler")]
+    [Route("api/watercooler")]
     public class WaterCoolerController : ControllerBase
     {
         private readonly IWaterCoolerService _WaterCoolerService;

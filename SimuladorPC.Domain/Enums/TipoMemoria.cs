@@ -2,8 +2,8 @@
 
 public enum TipoMemoria
 {
-    DDR,
-    DDR2,
+    DDR = 1,
+    DDR2 ,
     DDR3,
     DDR4,
     DDR5

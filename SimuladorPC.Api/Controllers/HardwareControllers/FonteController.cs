@@ -7,7 +7,7 @@ using SimuladorPC.Domain.Entities.Hardware;
 namespace SimuladorPC.Api.Controllers.HardwareControllers
 {
     [ApiController]
-    [Route("api/Fonte")]
+    [Route("api/fonte")]
     public class FonteController : ControllerBase
     {
         private readonly IFonteService _fonteService;

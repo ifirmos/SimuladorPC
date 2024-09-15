@@ -8,7 +8,7 @@ using SimuladorPC.Domain.Entities.Hardware;
 namespace SimuladorPC.Api.Controllers.HardwareControllers
 {
     [ApiController]
-    [Route("api/gabinetes")]
+    [Route("api/gabinete")]
     public class GabineteController : ControllerBase
     {
         private readonly IGabineteService _gabineteService;

@@ -16,9 +16,9 @@ public class CpuDto : ComponenteDto
     public int ConsumoEnergia { get;set; }
     public bool GraficosIntegrados { get;set; }
     public int TemperaturaMaxima { get;set; }
-    public string SuporteMemoria { get;set; }
     public int NumeroCanaisMemoria { get;set; }
     public string Plataforma { get;set; }
+    public TipoMemoria TipoMemoria { get;set; }
     public VersaoPcie VersaoPcie { get;  set; }
     public int PcieLanes { get;set; }
     public int Nucleos { get;set; }

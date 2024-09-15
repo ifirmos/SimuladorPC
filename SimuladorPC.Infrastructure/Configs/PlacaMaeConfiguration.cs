@@ -8,9 +8,9 @@ namespace SimuladorPC.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<PlacaMae> builder)
         {
-            builder.HasKey(p => p.Id);
-            builder.Property(p => p.SocketProcessador).IsRequired();
-            builder.Property(p => p.ChipsetId).IsRequired();
+            //builder.HasKey(p => p.Id);
+            //builder.Property(p => p.SocketProcessador).IsRequired();
+            //builder.Property(p => p.ChipsetId).IsRequired();
         }
     }
 }

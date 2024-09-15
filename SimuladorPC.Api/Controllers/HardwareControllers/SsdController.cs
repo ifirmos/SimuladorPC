@@ -7,7 +7,7 @@ using SimuladorPC.Application.DTO;
 namespace SimuladorPC.Api.Controllers.HardwareControllers
 {
     [ApiController]
-    [Route("api/Ssd")]
+    [Route("api/ssd")]
     public class SsdController : ControllerBase
     {
         private readonly ISsdService _SsdService;

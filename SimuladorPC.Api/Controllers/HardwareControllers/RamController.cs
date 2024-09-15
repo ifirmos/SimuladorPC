@@ -7,7 +7,7 @@ using SimuladorPC.Domain.Entities.Hardware;
 namespace SimuladorPC.Api.Controllers.HardwareControllers
 {
     [ApiController]
-    [Route("api/Ram")]
+    [Route("api/ram")]
     public class RamController : ControllerBase
     {
         private readonly IRamService _RamService;

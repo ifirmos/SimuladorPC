@@ -15,7 +15,7 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
 builder.Services.AddDbContext<SimuladorPcContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SimuladorPcDatabase")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SimuladorPcDatabase2")));
 
 builder.Services.AddCors(options =>
 {

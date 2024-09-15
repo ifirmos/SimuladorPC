@@ -6,10 +6,6 @@ using SimuladorPC.Infrastructure.Data;
 namespace SimuladorPC.Infrastructure.Repositories;
 
 public class CpuRepository(SimuladorPcContext context) : BaseRepository<Cpu>(context), ICpuRepository
-{
-    public override IEnumerable<Cpu> GetAll()
-    {
-        return _entities;
-    }
+{   
 }
 

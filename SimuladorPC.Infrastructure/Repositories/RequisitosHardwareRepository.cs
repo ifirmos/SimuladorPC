@@ -33,19 +33,54 @@ public class RequisitosHardwareRepository : BaseRepository<RequisitosHardware>, 
             .ToList();
     }
 
+    //public Gpu ObterGpuCompativel(RequisitosHardware requisitos, SetupPc setupPc)
+    //{
+    //    var gpuCompativel = _context.Gpus
+    //        .Where(gpu => gpu.PontuacaoPassMarkG3D >= requisitos.PontuacaoPassMarkG3D &&
+    //                      gpu.QtdMemoriaEmGb >= requisitos.MinimoVRamGpuGb &&
+    //                      (requisitos.TecnologiasRequeridas == null ||
+    //                       !requisitos.TecnologiasRequeridas.Any() ||
+    //                       requisitos.TecnologiasRequeridas.All(reqTec => gpu.TecnologiasSuportadas.Contains(reqTec))))
+    //        .OrderBy(gpu => gpu.PontuacaoPassMarkG3D)
+    //        .FirstOrDefault();
+
+    //    return gpuCompativel ?? throw new InvalidOperationException("Nenhuma GPU encontrada para os requisitos informados.");
+    //}
+
     public Gpu ObterGpuCompativel(RequisitosHardware requisitos, SetupPc setupPc)
     {
-        var gpuCompativel = _context.Gpus
-            .Where(gpu => gpu.PontuacaoPassMarkG3D >= requisitos.PontuacaoPassMarkG3D &&
-                          gpu.QtdMemoriaEmGb >= requisitos.MinimoVRamGpuGb &&
-                          (requisitos.TecnologiasRequeridas == null ||
-                           !requisitos.TecnologiasRequeridas.Any() ||
-                           requisitos.TecnologiasRequeridas.All(reqTec => gpu.TecnologiasSuportadas.Contains(reqTec))))
+        var query = _context.Gpus.AsQueryable();
+
+        // Aplicar filtros dinamicamente com base nos requisitos existentes
+        if (requisitos.PontuacaoPassMarkG3D > 0)
+        {
+            query = query.Where(gpu => gpu.PontuacaoPassMarkG3D >= requisitos.PontuacaoPassMarkG3D);
+        }
+
+        if (requisitos.MinimoVRamGpuGb > 0)
+        {
+            query = query.Where(gpu => gpu.QtdMemoriaEmGb >= requisitos.MinimoVRamGpuGb);
+        }
+
+        if (requisitos.MinimoClockGpuMhz > 0)
+        {
+            query = query.Where(gpu => gpu.FrequenciaBaseMhz >= requisitos.MinimoClockGpuMhz);
+        }
+
+        if (requisitos.TecnologiasRequeridas != null && requisitos.TecnologiasRequeridas.Any())
+        {
+            query = query.Where(gpu => requisitos.TecnologiasRequeridas.All(reqTec => gpu.TecnologiasSuportadas.Contains(reqTec)));
+        }
+
+        // Adicionar outras condições conforme necessário para verificar outros requisitos
+
+        var gpuCompativel = query
             .OrderBy(gpu => gpu.PontuacaoPassMarkG3D)
             .FirstOrDefault();
 
         return gpuCompativel ?? throw new InvalidOperationException("Nenhuma GPU encontrada para os requisitos informados.");
     }
+
 
     public IEnumerable<Gpu> ListarGpusCompativeis(RequisitosHardware requisitos, SetupPc setupPc)
     {
