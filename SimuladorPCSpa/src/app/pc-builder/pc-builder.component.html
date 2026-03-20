@@ -1,0 +1,42 @@
+<div class="pc-builder-container">
+  <p-panel header="Configurador de PC" [toggleable]="true">
+    <p class="pc-builder-intro">
+      Monte o seu PC ideal selecionando os componentes abaixo.
+    </p>
+  </p-panel>
+
+  <p-panel header="Placa de Vídeo (GPU)" [toggleable]="true" styleClass="mt-3">
+    <div class="field">
+      <label for="gpu-select" class="field-label">Selecione a GPU:</label>
+      <p-select
+        inputId="gpu-select"
+        [options]="gpus"
+        [(ngModel)]="selectedGpu"
+        optionLabel="nome"
+        placeholder="Escolha uma GPU"
+        [showClear]="true"
+        styleClass="w-full"
+      ></p-select>
+    </div>
+
+    <div *ngIf="selectedGpu" class="selected-info">
+      <strong>GPU selecionada:</strong> {{ selectedGpu.nome }} — {{ selectedGpu.modelo }}
+    </div>
+  </p-panel>
+
+  <div class="actions">
+    <p-button
+      label="Confirmar Build"
+      icon="pi pi-check"
+      severity="success"
+      (onClick)="confirmarBuild()"
+    ></p-button>
+
+    <p-button
+      label="Limpar"
+      icon="pi pi-times"
+      severity="secondary"
+      (onClick)="limparBuild()"
+    ></p-button>
+  </div>
+</div>

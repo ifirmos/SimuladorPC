@@ -1,12 +1,11 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { GpuListComponent } from './app/gpu-list/gpu-list.component';
-import { importProvidersFrom } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { PcBuilderComponent } from './app/pc-builder/pc-builder.component';
+import { provideHttpClient } from '@angular/common/http';
 import { appConfig } from './app/app.config';
 
-bootstrapApplication(GpuListComponent, {
+bootstrapApplication(PcBuilderComponent, {
   providers: [
     ...appConfig.providers,
-    importProvidersFrom(HttpClientModule)
+    provideHttpClient()
   ]
 }).catch(err => console.error(err));
