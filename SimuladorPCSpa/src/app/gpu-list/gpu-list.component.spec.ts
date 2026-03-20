@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { GpuListComponent } from './gpu-list.component';
 
@@ -8,7 +9,8 @@ describe('GpuListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GpuListComponent]
+      imports: [GpuListComponent],
+      providers: [provideHttpClient()],
     })
     .compileComponents();
     

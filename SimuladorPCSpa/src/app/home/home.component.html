@@ -1,0 +1,36 @@
+<div class="home-container">
+  <p-card styleClass="welcome-card">
+    <ng-template pTemplate="header">
+      <div class="welcome-header">
+        <i class="pi pi-desktop welcome-icon"></i>
+        <h1>Simulador de PC</h1>
+        <p>Monte o computador dos seus sonhos escolhendo cada componente</p>
+      </div>
+    </ng-template>
+    <div class="welcome-actions">
+      <p-button label="Começar a Montar" icon="pi pi-play" routerLink="/gpus" />
+    </div>
+  </p-card>
+
+  <div class="components-grid">
+    @for (componente of componentesPc; track componente.nome) {
+      <p-card [header]="componente.nome" styleClass="component-card">
+        <ng-template pTemplate="content">
+          <div class="component-content">
+            <i [class]="componente.icone + ' component-icon'"></i>
+            <p>{{ componente.descricao }}</p>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <p-button
+            label="Ver componentes"
+            icon="pi pi-arrow-right"
+            [routerLink]="componente.rota"
+            variant="outlined"
+            styleClass="w-full"
+          />
+        </ng-template>
+      </p-card>
+    }
+  </div>
+</div>
