@@ -1,0 +1,25 @@
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { DataView } from 'primeng/dataview';
+import { Card } from 'primeng/card';
+import { PcBuilderService } from '../pc-builder.service';
+import { HttpClientModule } from '@angular/common/http';
+
+@Component({
+  selector: 'app-hardware-browser',
+  standalone: true,
+  imports: [CommonModule, HttpClientModule, DataView, Card],
+  templateUrl: './hardware-browser.component.html',
+  styleUrl: './hardware-browser.component.css'
+})
+export class HardwareBrowserComponent implements OnInit {
+  gpus: any[] = [];
+
+  constructor(private pcBuilderService: PcBuilderService) { }
+
+  ngOnInit(): void {
+    this.pcBuilderService.listarGpus().subscribe(data => {
+      this.gpus = data;
+    });
+  }
+}

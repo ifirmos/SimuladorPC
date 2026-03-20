@@ -1,0 +1,21 @@
+<div class="hardware-browser-container">
+  <h2>Hardware Browser</h2>
+
+  <p-dataview [value]="gpus" layout="grid">
+    <ng-template #grid let-items>
+      <div class="gpu-grid">
+        @for (gpu of items; track gpu.id) {
+          <p-card [header]="gpu.nome" [subheader]="gpu.fabricante">
+            <p>Memória: {{ gpu.qtdMemoriaEmGb }} GB</p>
+            <p>Frequência Base: {{ gpu.frequenciaBaseMhz }} MHz</p>
+            <p>Potência Recomendada: {{ gpu.potenciaRecomendadaEmWatts }} W</p>
+          </p-card>
+        }
+      </div>
+    </ng-template>
+
+    <ng-template #emptymessage>
+      <p class="empty-message">Nenhuma GPU encontrada.</p>
+    </ng-template>
+  </p-dataview>
+</div>

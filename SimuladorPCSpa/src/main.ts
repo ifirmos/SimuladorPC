@@ -1,10 +1,10 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { GpuListComponent } from './app/gpu-list/gpu-list.component';
+import { HardwareBrowserComponent } from './app/hardware-browser/hardware-browser.component';
 import { importProvidersFrom } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { appConfig } from './app/app.config';
 
-bootstrapApplication(GpuListComponent, {
+bootstrapApplication(HardwareBrowserComponent, {
   providers: [
     ...appConfig.providers,
     importProvidersFrom(HttpClientModule)
