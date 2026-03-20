@@ -1,11 +1,6 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { GpuListComponent } from './gpu-list/gpu-list.component';
-
-const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'gpus', component: GpuListComponent },
-];
+import { RouterModule } from '@angular/router';
+import { routes } from './app.routes';
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -13,6 +13,10 @@ import { ButtonModule } from 'primeng/button';
 export class HomeComponent {
   componentesPc = [
     { nome: 'GPUs', descricao: 'Placas de vídeo para seu computador', icone: 'pi pi-desktop', rota: '/gpus' },
-    { nome: 'Monte seu PC', descricao: 'Monte uma configuração completa personalizada', icone: 'pi pi-cog', rota: '/pc-builder' },
+    { nome: 'CPUs', descricao: 'Processadores de alto desempenho', icone: 'pi pi-microchip', rota: '/cpus' },
+    { nome: 'Memória RAM', descricao: 'Módulos de memória para seu sistema', icone: 'pi pi-server', rota: '/rams' },
+    { nome: 'Armazenamento', descricao: 'SSDs e HDs para guardar seus dados', icone: 'pi pi-database', rota: '/ssds' },
+    { nome: 'Placas-Mãe', descricao: 'A base de todo bom computador', icone: 'pi pi-th-large', rota: '/placas-mae' },
+    { nome: 'Fontes', descricao: 'Fontes de alimentação confiáveis', icone: 'pi pi-bolt', rota: '/fontes' },
   ];
 }
