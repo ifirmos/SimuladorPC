@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 import { DataView } from 'primeng/dataview';
 import { Card } from 'primeng/card';
 import { PcBuilderService } from '../pc-builder.service';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-hardware-browser',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, DataView, Card],
+  imports: [CommonModule, DataView, Card],
   templateUrl: './hardware-browser.component.html',
   styleUrl: './hardware-browser.component.css'
 })

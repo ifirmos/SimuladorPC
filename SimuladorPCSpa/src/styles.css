@@ -1,0 +1,106 @@
+/* ============================================================
+   Global Styles — SimuladorPC
+   PrimeNG Aura theme variables + base styles
+   Dark mode: add `.app-dark` class to <body>
+   ============================================================ */
+
+/* ── Light mode (default) ── */
+:root {
+  /* Surface / background tokens */
+  --app-surface-ground:   #f8f9fa;
+  --app-surface-section:  #ffffff;
+  --app-surface-card:     #ffffff;
+  --app-surface-overlay:  #ffffff;
+  --app-surface-border:   #dee2e6;
+  --app-surface-hover:    #e9ecef;
+
+  /* Text tokens */
+  --app-text-color:           #212529;
+  --app-text-color-secondary: #6c757d;
+
+  /* Primary brand (Aura blue) */
+  --app-primary-color:         #6366f1;
+  --app-primary-color-text:    #ffffff;
+
+  /* Focus ring */
+  --app-focus-ring: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
+
+  /* Borders */
+  --app-border-radius: 6px;
+
+  /* Shadows */
+  --app-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Dark mode ── */
+.app-dark {
+  /* Surface / background tokens */
+  --app-surface-ground:   #0f0f0f;
+  --app-surface-section:  #1a1a1a;
+  --app-surface-card:     #1e1e1e;
+  --app-surface-overlay:  #2a2a2a;
+  --app-surface-border:   #333333;
+  --app-surface-hover:    #2c2c2c;
+
+  /* Text tokens */
+  --app-text-color:           #e0e0e0;
+  --app-text-color-secondary: #9e9e9e;
+
+  /* Primary brand */
+  --app-primary-color:         #818cf8;
+  --app-primary-color-text:    #0f0f0f;
+
+  /* Focus ring */
+  --app-focus-ring: 0 0 0 0.2rem rgba(129, 140, 248, 0.35);
+
+  /* Shadows */
+  --app-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Base reset & typography ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 14px;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family: var(--p-font-family, "Inter", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--app-text-color);
+  background-color: var(--app-surface-ground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--app-primary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--app-text-color);
+}
+
+p {
+  margin: 0 0 1rem;
+  color: var(--app-text-color-secondary);
+}

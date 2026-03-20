@@ -1,12 +1,14 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { HardwareBrowserComponent } from './app/hardware-browser/hardware-browser.component';
-import { importProvidersFrom } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { AppComponent } from './app/app.component';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 import { appConfig } from './app/app.config';
+import { routes } from './app/app.routes';
 
-bootstrapApplication(HardwareBrowserComponent, {
+bootstrapApplication(AppComponent, {
   providers: [
     ...appConfig.providers,
-    importProvidersFrom(HttpClientModule)
+    provideRouter(routes),
+    provideHttpClient(),
   ]
 }).catch(err => console.error(err));
