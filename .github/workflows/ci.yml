@@ -32,8 +32,8 @@ jobs:
           cache: 'npm'
           cache-dependency-path: SimuladorPCSpa/package-lock.json
 
-      - name: Instalar dependências (npm ci)
-        run: npm ci
+      - name: Instalar dependências (npm install)
+        run: npm install
 
       - name: Build do frontend (npm run build)
         run: npm run build
