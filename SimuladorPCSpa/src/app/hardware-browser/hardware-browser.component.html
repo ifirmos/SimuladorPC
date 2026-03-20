@@ -5,7 +5,7 @@
     <ng-template #grid let-items>
       <div class="gpu-grid">
         @for (gpu of items; track gpu.id) {
-          <p-card [header]="gpu.nome" [subheader]="gpu.fabricante">
+          <p-card [header]="gpu.nome" [subheader]="gpu.fabricante?.nome">
             <p>Memória: {{ gpu.qtdMemoriaEmGb }} GB</p>
             <p>Frequência Base: {{ gpu.frequenciaBaseMhz }} MHz</p>
             <p>Potência Recomendada: {{ gpu.potenciaRecomendadaEmWatts }} W</p>
