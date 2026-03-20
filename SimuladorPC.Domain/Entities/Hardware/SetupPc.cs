@@ -11,6 +11,7 @@
         public virtual Ram Ram { get; set; }
         public virtual Ssd Ssd { get; set; }
         public int ConsumoMaximoTotalEmWatts { get; set; }
+        public int PontuacaoTotalBenchmark { get; set; }
 
 
         public SetupPc()

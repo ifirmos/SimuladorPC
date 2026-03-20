@@ -2,6 +2,6 @@
 
 namespace SimuladorPC.Domain.Interfaces.Repositories;
 
-public interface IFonteRepository : IBaseRepository<Fonte>
+public interface ISsdRepository : IBaseRepository<Ssd>
 {
 }

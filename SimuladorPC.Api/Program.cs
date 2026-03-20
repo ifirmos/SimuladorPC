@@ -37,6 +37,8 @@ builder.Services.AddScoped<IRamRepository, RamRepository>();
 builder.Services.AddScoped<IPlacaMaeRepository, PlacaMaeRepository>();
 builder.Services.AddScoped<ISoftwareRepository, SoftwareRepository>();
 builder.Services.AddScoped<IWaterCoolerRepository, WaterCoolerRepository>();
+builder.Services.AddScoped<ISsdRepository, SsdRepository>();
+builder.Services.AddScoped<IFonteRepository, FonteRepository>();
 
 builder.Services.AddScoped<ICpuService, CpuService>();
 builder.Services.AddScoped<IGpuService, GpuService>();

@@ -29,6 +29,7 @@ public class PcBuilderService : IPcBuilderService
             setupPc.WaterCooler = ObterWaterCoolerCompativel(software, setupPc);
             setupPc.Gabinete = ObterGabineteAdequado(software, setupPc);
             CalcularConsumoTotalWatts(setupPc);
+            CalcularPontuacaoBenchmark(setupPc);
             setupPc.Fonte = ObterFonteAdequada(setupPc);
         }
         catch (Exception ex)
@@ -51,6 +52,7 @@ public class PcBuilderService : IPcBuilderService
             setupPc.WaterCooler = ObterWaterCoolerCompativel(requisito, setupPc);
             setupPc.Gabinete = ObterGabineteAdequado(requisito, setupPc);
             CalcularConsumoTotalWatts(setupPc);
+            CalcularPontuacaoBenchmark(setupPc);
             setupPc.Fonte = ObterFonteAdequada(setupPc);
         }
         catch (Exception ex)
@@ -73,6 +75,14 @@ public class PcBuilderService : IPcBuilderService
         consumoTotal += setupPc.Gabinete?.ConsumoEmWatts ?? 0;
 
         setupPc.ConsumoMaximoTotalEmWatts = consumoTotal;
+    }
+
+    private static void CalcularPontuacaoBenchmark(SetupPc setupPc)
+    {
+        int pontuacaoCpu = setupPc.Cpu?.PontuacaoCpuMark ?? 0;
+        int pontuacaoGpu = setupPc.Gpu?.PontuacaoPassMarkG3D ?? 0;
+
+        setupPc.PontuacaoTotalBenchmark = pontuacaoCpu + pontuacaoGpu;
     }
     private Cpu ObterCpuCompativel(Software software)
     {

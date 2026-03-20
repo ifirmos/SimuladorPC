@@ -12,4 +12,6 @@ public class SetupPcDto
     public Fonte Fonte { get; set; }
     public Gabinete Gabinete { get; set; }
     public WaterCooler? WaterCooler { get; set; }
+    public int ConsumoMaximoTotalEmWatts { get; set; }
+    public int PontuacaoTotalBenchmark { get; set; }
 }

@@ -27,7 +27,7 @@ namespace SimuladorPC.Api.Controllers.HardwareControllers
             return Ok(listaGpuDto);
         }
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public ActionResult<GpuDto> ObterPorId(int id)
         {
             var gpu = _gpuService.ObterPorId(id);
