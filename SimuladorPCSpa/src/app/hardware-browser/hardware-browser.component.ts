@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { DataView } from 'primeng/dataview';
 import { Card } from 'primeng/card';
 import { PcBuilderService } from '../pc-builder.service';
@@ -7,7 +6,7 @@ import { PcBuilderService } from '../pc-builder.service';
 @Component({
   selector: 'app-hardware-browser',
   standalone: true,
-  imports: [CommonModule, DataView, Card],
+  imports: [DataView, Card],
   templateUrl: './hardware-browser.component.html',
   styleUrl: './hardware-browser.component.css'
 })

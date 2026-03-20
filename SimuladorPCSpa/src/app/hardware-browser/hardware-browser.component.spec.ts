@@ -1,7 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { of } from 'rxjs';
 import { HardwareBrowserComponent } from './hardware-browser.component';
 import { PcBuilderService } from '../pc-builder.service';
-import { of } from 'rxjs';
 
 describe('HardwareBrowserComponent', () => {
   let component: HardwareBrowserComponent;
@@ -15,6 +17,8 @@ describe('HardwareBrowserComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HardwareBrowserComponent],
       providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
         { provide: PcBuilderService, useValue: pcBuilderServiceSpy }
       ]
     }).compileComponents();
@@ -30,12 +34,24 @@ describe('HardwareBrowserComponent', () => {
 
   it('should load GPUs on init', () => {
     const mockGpus = [
-      { id: 1, nome: 'RTX 4090', fabricante: 'NVIDIA', qtdMemoriaEmGb: 24, frequenciaBaseMhz: 2235, potenciaRecomendadaEmWatts: 850 }
+      {
+        id: 1,
+        nome: 'RTX 4090',
+        fabricante: { nome: 'NVIDIA', site: 'https://nvidia.com' },
+        qtdMemoriaEmGb: 24,
+        frequenciaBaseMhz: 2235,
+        potenciaRecomendadaEmWatts: 850
+      }
     ];
     pcBuilderServiceSpy.listarGpus.and.returnValue(of(mockGpus));
 
     component.ngOnInit();
 
     expect(component.gpus).toEqual(mockGpus);
+  });
+
+  it('should display page heading', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('h2')?.textContent).toContain('Navegador de Hardware');
   });
 });
