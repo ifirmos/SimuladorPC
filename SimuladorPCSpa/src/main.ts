@@ -1,11 +1,14 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { PcBuilderComponent } from './app/pc-builder/pc-builder.component';
+import { AppComponent } from './app/app.component';
+import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { appConfig } from './app/app.config';
+import { routes } from './app/app.routes';
 
-bootstrapApplication(PcBuilderComponent, {
+bootstrapApplication(AppComponent, {
   providers: [
     ...appConfig.providers,
-    provideHttpClient()
+    provideRouter(routes),
+    provideHttpClient(),
   ]
 }).catch(err => console.error(err));
