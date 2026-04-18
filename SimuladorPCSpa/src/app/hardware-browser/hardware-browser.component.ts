@@ -5,7 +5,6 @@ import { PcBuilderService } from '../pc-builder.service';
 
 @Component({
   selector: 'app-hardware-browser',
-  standalone: true,
   imports: [DataView, Card],
   templateUrl: './hardware-browser.component.html',
   styleUrl: './hardware-browser.component.css'

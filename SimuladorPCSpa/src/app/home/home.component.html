@@ -1,6 +1,6 @@
 <div class="home-container">
   <p-card styleClass="welcome-card">
-    <ng-template pTemplate="header">
+    <ng-template #header>
       <div class="welcome-header">
         <i class="pi pi-desktop welcome-icon"></i>
         <h1>Simulador de PC</h1>
@@ -15,13 +15,13 @@
   <div class="components-grid">
     @for (componente of componentesPc; track componente.nome) {
       <p-card [header]="componente.nome" styleClass="component-card">
-        <ng-template pTemplate="content">
+        <ng-template #content>
           <div class="component-content">
             <i [class]="componente.icone + ' component-icon'"></i>
             <p>{{ componente.descricao }}</p>
           </div>
         </ng-template>
-        <ng-template pTemplate="footer">
+        <ng-template #footer>
           <p-button
             label="Ver componentes"
             icon="pi pi-arrow-right"

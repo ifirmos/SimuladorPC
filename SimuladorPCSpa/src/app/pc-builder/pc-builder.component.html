@@ -19,9 +19,11 @@
       ></p-select>
     </div>
 
-    <div *ngIf="selectedGpu" class="selected-info">
-      <strong>GPU selecionada:</strong> {{ selectedGpu.nome }} — {{ selectedGpu.modelo }}
-    </div>
+    @if (selectedGpu) {
+      <div class="selected-info">
+        <strong>GPU selecionada:</strong> {{ selectedGpu.nome }} — {{ selectedGpu.modelo }}
+      </div>
+    }
   </p-panel>
 
   <div class="actions">

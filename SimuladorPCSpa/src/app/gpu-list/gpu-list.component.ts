@@ -1,18 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { PcBuilderService } from '../pc-builder.service';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-gpu-list',
-  standalone: true,
-  imports: [CommonModule, HttpClientModule],
   template: `
     <h1>Lista de GPUs</h1>
     <ul>
-      <li *ngFor="let gpu of gpus">
-        {{ gpu.nome }} - {{ gpu.modelo }}
-      </li>
+      @for (gpu of gpus; track gpu.nome) {
+        <li>{{ gpu.nome }} - {{ gpu.modelo }}</li>
+      }
     </ul>
   `
 })

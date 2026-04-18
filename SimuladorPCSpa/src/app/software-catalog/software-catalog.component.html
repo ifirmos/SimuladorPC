@@ -1,20 +1,22 @@
 <div class="catalog-container">
   <h1>Catálogo de Jogos e Softwares</h1>
   <div class="catalog-grid">
-    <p-card *ngFor="let software of softwares" class="catalog-card">
-      <ng-template pTemplate="header">
-        <img
-          [src]="software.imagemUrl"
-          [alt]="software.nome"
-          class="catalog-card-image"
-          (error)="onImageError($event)"
-        />
-      </ng-template>
-      <div class="catalog-card-body">
-        <h3 class="catalog-card-title">{{ software.nome }}</h3>
-        <p class="catalog-card-categoria">{{ software.categoria }}</p>
-        <p class="catalog-card-versao">Versão: {{ software.versao }}</p>
-      </div>
-    </p-card>
+    @for (software of softwares; track software.id) {
+      <p-card class="catalog-card">
+        <ng-template #header>
+          <img
+            [src]="software.imagemUrl"
+            [alt]="software.nome"
+            class="catalog-card-image"
+            (error)="onImageError($event)"
+          />
+        </ng-template>
+        <div class="catalog-card-body">
+          <h3 class="catalog-card-title">{{ software.nome }}</h3>
+          <p class="catalog-card-categoria">{{ software.categoria }}</p>
+          <p class="catalog-card-versao">Versão: {{ software.versao }}</p>
+        </div>
+      </p-card>
+    }
   </div>
 </div>

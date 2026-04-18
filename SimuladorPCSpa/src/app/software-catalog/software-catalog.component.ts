@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CardModule } from 'primeng/card';
+import { Card } from 'primeng/card';
 
 interface SoftwareCatalogItem {
   id: number;
@@ -12,8 +11,7 @@ interface SoftwareCatalogItem {
 
 @Component({
   selector: 'app-software-catalog',
-  standalone: true,
-  imports: [CommonModule, CardModule],
+  imports: [Card],
   templateUrl: './software-catalog.component.html',
   styleUrl: './software-catalog.component.css'
 })

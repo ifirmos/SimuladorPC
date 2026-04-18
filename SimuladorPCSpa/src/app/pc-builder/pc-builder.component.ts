@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Panel } from 'primeng/panel';
 import { Select } from 'primeng/select';
@@ -13,8 +12,7 @@ interface Gpu {
 
 @Component({
   selector: 'app-pc-builder',
-  standalone: true,
-  imports: [CommonModule, FormsModule, Panel, Select, Button],
+  imports: [FormsModule, Panel, Select, Button],
   templateUrl: './pc-builder.component.html',
   styleUrl: './pc-builder.component.css'
 })
